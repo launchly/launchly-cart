@@ -1,0 +1,28 @@
+<html>
+<head>
+	<title>Launch.ly Event Bubbling Sample</title>
+	<script src="../libs/jquery-loader.js"></script>
+</head>
+<body>
+
+<button class="empty-cart">Empty Cart</button>
+
+
+<script>
+
+$(document).ready(function() {
+	
+	// Listen for event
+	$(cart).on('cart.changed', function(event, data) {
+		alert('Shopping cart has been changed. ' + data);
+		update_cart(data);
+	});
+
+	$(document).on('click', '.empty-cart', function(event) {
+		cart.empty();	
+	});
+	
+});
+</script>
+</body>
+</html>

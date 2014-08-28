@@ -1,0 +1,539 @@
+<script id="shopping-cart-template" type="text/x-handlebars-template">
+	<div id="store-items">
+		<header class="clearfix">
+			<div class="pull-left">
+				<a href="#" class="show-hide-cart"><i class="icon-remove"></i></a>
+			</div>
+			<div class="pull-left">
+				<a href="#" class="show-hide-cart">Shopping Cart</a>
+			</div>
+			<div class="pull-right">
+				<i class="icon-lock"></i> Secure Online Shopping
+				<a href="#" data-cart-function="empty"><i class="icon-trash" rel="tooltip" title="empty cart"></i></a>
+			</div>
+		</header>
+	
+		<div class="cards">
+			<img src="https://melbourne-systems.s3.amazonaws.com/asset/file/5212011557817e9868000015/cards.png">
+		</div>
+	
+		<div id="store-inner">
+		
+			{{#if empty}}
+				<div class="empty">
+					<p><i class="icon-shopping-cart"></i></p>
+					<p>There are no items in your cart.</p>
+				</div>
+			{{else}}
+			
+				<div class="items">
+		
+					{{#items}}
+						<div class="item clearfix">
+							<div class="icon pull-left"><a href="{{url}}"><img src="{{column_2}}"></a></div>
+							<div class="title pull-left">
+								{{#if sold_out}}
+									<a href="{{url}}"><del>{{title}}</del></a>
+									<p>
+										<del>
+											{{name_a}}: {{name_b}}
+											{{#if sku}} ({{sku}}) {{/if}}
+										</del>
+									</p>
+								{{else}}
+									<a href="{{url}}">{{title}}</a>
+									<p>
+										{{name_a}}: {{name_b}}
+										{{#if sku}} ({{sku}}) {{/if}}
+									</p>
+								{{/if}}
+							</div>
+							<div class="qty pull-right">
+								<input class="string optional" data-cart="qty" data-item="{{variant_id}}" placeholder="0" size="20" type="text" value="{{quantity}}">
+							</div>
+							<div class="price pull-right">
+								{{formatted_price}}<br>
+								<span>
+								<a href="#" data-cart-function="remove" data-variant="{{variant_id}}"><i class="icon-remove-sign"></i></a>
+								Qty: {{quantity}}
+								</span>
+							</div>
+							{{#if sold_out}}
+								<div style="text-align:right;"><span class="label label-danger" style="font-size:8pt;">SOLD OUT</span></div>
+							{{/if}}
+
+						</div>
+					{{/items}}
+		
+				</div>
+		
+				<div class="clearfix">
+					{{#if discounts_available }}
+					<div class="pull-left">
+						<input id="coupon_code" name="coupon_code" placeholder="Coupon code" size="20" type="text" value="{{coupon_code}}">
+					</div>
+					{{/if}}
+
+					<a href="#" class="btn update pull-right" data-cart-function="update">Update</a>
+					<div class="pull-right sub-total">
+						<div class="intro">Sub-total</div>
+						<div class="price">{{formatted_total}}</div>
+					</div>
+				</div>
+		
+				<div class="clearfix" id="contact-prices">
+					<div class="pull-left">
+						{{#if has_name_and_address}}
+							<p>
+								<strong>ATT: {{first_name}} {{last_name}}</strong><br>
+								{{telephone_number}}
+							</p>
+							<p>
+								{{#if shipping_same_as_billing}}
+									{{billing_line1}}{{#if billing_line2}}, {{billing_line2}}{{/if}}<br>
+									{{billing_suburb}} {{billing_state_name}}<br>
+									{{billing_country_name}} {{billing_post_code}}
+								{{else}}
+									{{shipping_line1}}{{#if shipping_line2}}, {{shipping_line2}}{{/if}}<br>
+									{{shipping_suburb}} {{shipping_state_name}}<br>
+									{{shipping_country_name}} {{shipping_post_code}}
+								{{/if}}
+							</p>
+						{{else}}
+							{{#if signed_in}}
+								<p>Where shall we send your order?</p>
+							{{/if}}
+						{{/if}}
+					</div>
+					<div class="pull-left">
+						<div class="clearfix">
+							<div class="pull-left">Sub-total:</div>
+							<div class="pull-right">
+								{{#if has_active_variants}}
+									{{formatted_total}}
+								{{else}}
+									No active items!
+								{{/if}}
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="pull-left">Freight:</div>
+							<div class="pull-right">{{formatted_shipping_and_handling}}</div>
+						</div>
+						{{#if has_discount}}
+							<div class="clearfix">
+								<div class="pull-left">Discount:</div>
+								<div class="pull-right">{{formatted_discount}}</div>
+							</div>
+						{{/if}}
+						<div class="clearfix">
+							<div class="pull-left">Total:</div>
+							<div class="pull-right">{{formatted_grand_total}}</div>
+						</div>
+					</div>
+				</div>
+		
+				<div class="clearfix" id="cart-actions">
+					{{#if signed_in}}
+						<div class="pull-left">
+							<a href="#" class="show-detail-link" data-cart-screen="contact-details">{{#if has_addresses}}<i class="icon-pencil"></i> Change Details{{else}}Set Contact Details{{/if}}</a>
+						</div>
+						<div class="pull-left" style="text-align:center;">
+							{{#if can_pay}}
+								<a href="#" class="checkout" data-cart-screen="payment"><i class="icon-credit-card"></i> Pay Now</a>
+								<img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" data-cart-function="paypal" style="cursor:pointer;margin-top:15px;">									
+							{{/if}}
+						</div>
+													
+					{{else}}
+						<div class="sign_in_register">
+							<a href="{{sign_in_link}}" class="btn btn-warning" data-link="{{sign_in_link}}" onclick="newWindow=window.open('{{sign_in_link}}', 'loginwindow', 'height=600,width=940,status=yes'); if (window.focus) { newWindow.focus(); } return false;">
+								Sign in or Register to continue
+							</a>
+						</div>
+					{{/if}}
+				</div>			
+			{{/if}}
+
+		</div>
+	</div>
+
+<div class="modal fade" id="cart-contact-details">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+			
+				<div id="billing-form-placeholder">
+
+					<form role="form">
+				
+						<div class="row">
+							<div class="col-md-12">
+								<a class="close" data-dismiss="modal">&times;</a>
+							</div>
+						</div>
+				
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="first_name">
+										<abbr title="required"></abbr> First Name
+									</label>
+									<input type="text" autofocus="autofocus" name="first_name" id="first_name" value="{{first_name}}" placeholder="First name" class="form-control" />
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="last_name">
+										<abbr title="required">*</abbr> Last Name
+									</label>
+									<input type="text" name="last_name" id="last_name" value="{{last_name}}" placeholder="Last name" class="form-control" />
+								</div>
+							</div>
+						</div>
+					
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="telephone_number">Telephone Number</label>
+									<input type="text" name="telephone_number" id="telephone_number" value="{{telephone_number}}" placeholder="Contact phone number" class="form-control" />
+								</div>
+							</div>
+						</div>
+					
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<select name="billing_country" id="billing_country">
+										<option value="">- select country -</option>
+										{{#countries}}
+											<option value="{{a2}}"{{#if billing_country }} selected{{/if}}>{{name}}</option>
+										{{/countries}}
+									</select>
+								</div>
+							</div>
+								<div class="col-md-8">
+									<div class="form-group">
+										<div id="state-billing-select-placeholder"></div>
+									</div>
+								</div>
+						</div>
+					
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="billing_line1"><abbr title="required">*</abbr> Address</label>
+									<input type="text" name="billing_line1" id="billing_line1" value="{{billing_line1}}" placeholder="Address" class="form-control" />
+								</div>
+							</div>
+						</div>
+					
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<input type="text" name="billing_line2" id="billing_line2" value="{{billing_line2}}" class="form-control" />
+								</div>
+							</div>
+						</div>
+					
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="billing_suburb"><abbr title="required">*</abbr> City/Suburb</label>
+									<input type="text" name="billing_suburb" id="billing_suburb" value="{{billing_suburb}}" placeholder="City/Suburb" class="form-control" />
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="billing_post_code"><abbr title="required">*</abbr> Post Code</label>
+									<input type="text" name="billing_post_code" id="billing_post_code" value="{{billing_post_code}}" placeholder="Post Code" class="form-control" />
+								</div>
+							</div>
+						</div>
+
+					</form>
+
+				
+				</div>
+
+			</div>
+		
+			<div class="modal-footer">
+				<div class="pull-left">
+					<a href="#" class="btn" data-dismiss="modal">Close</a>
+				</div>
+				<div class="pull-right">
+					<a href="#" class="btn btn-success" data-cart-function="update">Update Details</a>
+				</div>
+			</div>
+		
+		</div>
+	</div>
+	</div>
+
+	<div class="modal fade" id="cart-payment">
+
+		<div class="modal-dialog">
+
+			<div class="modal-content">
+
+				<div class="modal-header clearfix {{#if testing_payment_gateway}}error{{/if}}">
+			
+					<div class="clearfix">
+						<a class="close" data-dismiss="modal">&times;</a>
+					</div>
+
+					<div class="pull-left lock">
+						{{#if testing_payment_gateway}}
+							<i class="icon-warning-sign"></i>
+						{{else}}
+							<i class="icon-lock"></i>
+						{{/if}}
+					</div>
+					<div class="pull-left">
+						{{#if testing_payment_gateway}}
+							<h1>WARNING: DO NOT submit real orders!</h1>
+							<p>Do not submit real orders. We are in test and evaluation mode.</p>
+						{{else}}
+							<h1>Secure Credit Card Payment</h1>
+							<p>This is a secure 256-bit SSL encrypted payment</p>
+						{{/if}}
+					</div>
+				
+					<div class="pull-right">{{formatted_grand_total}}</div>
+				
+				</div>
+
+				<div class="modal-body">
+
+					<div id="cart-payment-alert"></div>
+
+					<input type="hidden" id="cart_reference" name="cart_reference" value="{{reference}}">
+					<input type="hidden" id="session_id" name="session_id" value="{{session_id}}">
+
+					<div style="background-color:#f6f6f6;width:100%;margin:1.5em 0em 1.5em 0em;" class="clearfix">
+						<div style="padding:10px;" class="clearfix">
+
+							<div class='pull-left' id='payment-panel'>
+
+								<div class='pull-left' style='margin-right:1em;'>
+									<div class="control-group string required">
+										<label class="string required control-label" for="card_first_name"><abbr title="required">*</abbr> Card first name</label>
+										<div class="controls">
+											<input class="string required" id="card_first_name" name="card_first_name" placeholder="first name" size="50" style="width:120px;" type="text">
+										</div>
+									</div>
+								</div>
+
+								<div class='pull-left'>
+									<div class="control-group string required">
+										<label class="string required control-label" for="card_last_name"><abbr title="required">*</abbr> Card last name</label>
+										<div class="controls">
+											<input class="string required" id="card_last_name" name="card_last_name" placeholder="last name" size="50" style="width:180px" type="text">
+										</div>
+									</div>
+								</div>
+
+								<div class='pull-left' id='card-number' style='margin-left:1em;margin-right:1em;'>
+									<div class="control-group string required">
+										<label class="string required control-label" for="card_number"><abbr title="required">*</abbr> Card number</label>
+										<div class="controls">
+											<input class="string required" id="card_number" name="card_number" size="50" style="width:190px" type="text">
+										</div>
+									</div>
+								</div>
+
+								<div class='pull-left' style='margin-top:1.6em;'>
+									<img alt="Visa" data-type="visa" class="payment-icon" style="cursor:hand;" src="https://d19sd42nsxuauk.cloudfront.net/spitfire/icons/payment/visa.png">
+									<img alt="Master" data-type="master" class="payment-icon" style="cursor:hand;" src="https://d19sd42nsxuauk.cloudfront.net/spitfire/icons/payment/master.png">
+									<img alt="American Express" data-type="american_express" style="cursor:hand;" class="payment-icon" src="https://d19sd42nsxuauk.cloudfront.net/spitfire/icons/payment/american_express.png">
+								</div>
+
+								<div class="clear" style="margin-bottom:20px;"></div>
+
+								<div id='card-type-select' class="hidden">
+									<select id="payment_type" name="payment_type">
+										<option value="">- select payment method -</option>
+										<option value="visa">Visa</option>
+										<option value="master">Mastercard</option>
+										<option value="american_express">American Express</option>
+									</select>
+								</div>
+
+								<div class='pull-left' id='card-expires-month' style='margin-right:1em;'>
+									<div class="control-group select required">
+										<label class="select required control-label" for="card_expires_month"><abbr title="required">*</abbr> Expiry Month</label>
+										<div class="controls">
+											<select class="select required" id="card_expires_month" name="card_expires_month" style="width:130px;">
+												<option value="">- select month -</option>
+												<option value="1">1 - January</option>
+												<option value="2">2 - February</option>
+												<option value="3">3 - March</option>
+												<option value="4">4 - April</option>
+												<option value="5">5 - May</option>
+												<option value="6">6 - June</option>
+												<option value="7">7 - July</option>
+												<option value="8">8 - August</option>
+												<option value="9">9 - September</option>
+												<option value="10">10 - October</option>
+												<option value="11">11 - November</option>
+												<option value="12">12 - December</option>
+											</select>
+										</div>
+									</div>
+								</div>
+
+								<div class='pull-left' id='card-expires-year' style='margin-right:1em;'>
+									<div class="control-group select required">
+										<label class="select required control-label" for="card_expires_year"><abbr title="required">*</abbr> Expiry Year</label>
+										<div class="controls">
+											<select class="select required" id="card_expires_year" name="card_expires_year" style="width:120px;">
+												<option value="">- select year -</option>
+												{{#expiry_years}}
+													<option value="{{.}}">{{.}}</option>
+												{{/expiry_years}}
+											</select>
+										</div>
+									</div>
+								</div>
+
+								<div class='pull-left' id='cvv'>
+									<div class="control-group string required">
+										<label class="string required control-label" for="card_verification"><abbr title="required">*</abbr> CVV</label>
+										<div class="controls">
+											<input class="string required" id="card_verification" name="card_verification" size="50" style="width:50px" type="text">
+										</div>
+									</div>
+								</div>
+
+								<img src="/spitfire/icons/payment/cvv.png" border="0" id="cvv-icon" class="pull-left" style="margin-left:1em;margin-top:22px;opacity:0.2;">					
+
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="modal-footer">
+					<div class="pull-left">
+						<a href="#" class="btn" data-dismiss="modal">Close</a>
+					</div>
+					<div class="pull-right">
+						{{#if can_pay_later }}
+						<a href="#" class="btn btn-large" data-cart-function="on_account">Pay later</a>
+						{{/if}}
+						<a href="#" class="btn btn-large btn-success" data-loading-text="Processing ..." data-cart-function="pay">Process Payment</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</script>
+
+
+<script id="state-select-template" type="text/x-handlebars-template">
+	<div class="control-group">
+		<div class="controls">
+			<select name="{{type}}_state" id="{{type}}_state">
+				<option value="">- select state -</option>
+				{{#states}}
+					<option value="{{abbreviation}}">{{name}}</option>
+				{{/states}}
+			</select>
+		</div>
+	</div>
+</script>
+
+
+<script id="cart-payment-success-template" type="text/x-handlebars-template">
+	<div class="modal fade" id="cart-payment-success-placeholder" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<a class="close" data-dismiss="modal">&times;</a>
+				</div>
+				<div class="modal-body" style="height:500px;">
+					<h1><span><i class="icon-ok-sign"></i></span>Payment Success!</h1>
+
+					<p>
+						We just sent you an email with the details of your order.
+					</p>
+
+					<p>Your order reference number is <strong>{{reference}}</strong></p>
+
+				</div>
+				<div class="modal-footer">
+					<div class="social pull-left">
+						<a class="facebook" href="https://www.facebook.com/pages/Diaries-Direct/624374957602899"><i class="icon-facebook"></i></a>
+						<a class="twitter" href="https://twitter.com/DiariesDirect"><i class="icon-twitter"></i></a>
+						<a class="google-plus" href="https://plus.google.com/u/0/b/118219955978978027619/118219955978978027619/posts"><i class="icon-google-plus"></i></a>
+						<a class="linkedin" href="http://www.linkedin.com/company/3306500"><i class="icon-linkedin"></i></a>
+					</div>
+					<div class="pull-right">
+						<a href="#" class="btn" data-dismiss="modal">Close</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+
+
+<script id="cart-payment-failure-template" type="text/x-handlebars-template">
+	<div class="modal fade" id="cart-payment-failure-placeholder" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<a class="close" data-dismiss="modal">&times;</a>
+				</div>
+
+				<div class="modal-body" style="height:500px;">
+					<h1><span><i class="icon-remove-sign"></i></span>Payment Declined!</h1>
+					<p class="alert alert-error hide">{{message}}</p>
+
+					<p class="first">
+						Don&lsquo;t worry. It happens. You can <a href="#" onclick="payment_failure_message(); return false;">view the message</a> that<br>
+						was returned from our payment gateway
+						{{#unless has_paypal }}
+							or<br> you can 							
+							<a href="#" data-cart-screen="payment">try again</a>
+						{{/unless}}
+					</p>
+
+					<p class="last">
+						{{#unless has_paypal }}
+							<a href="#" class="btn" data-cart-screen="payment">Try again</a>
+						{{/unless}}
+						<a href="#" class="btn" onclick="payment_failure_message(); return false;">View message</a>
+					</p>
+
+				</div>
+				<div class="modal-footer">
+					<div>
+						<a href="#" class="btn" data-dismiss="modal">Close</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+
+
+<script id="cart-checkout-template" type="text/x-handlebars-template">
+	<a class="clearfix show-hide-cart">
+		<div class="pull-left">
+			<img src="https://melbourne-systems.s3.amazonaws.com/asset/file/5215954f57817e6ff5000002/shopping-cart-icon.svg" />
+		</div>
+		<div class="pull-left">
+			<div class="price">{{formatted_grand_total}}</div>
+			<div class="item">{{items_count}} items in cart</div>
+		</div>
+		<div class="pull-left">
+			<span>Checkout</span>
+		</div>
+	</a>
+</script>
