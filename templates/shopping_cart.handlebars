@@ -1,0 +1,213 @@
+<input type="hidden" id="cart_reference" name="cart_reference" value="{{reference}}">
+<input type="hidden" id="session_id" name="session_id" value="{{session_id}}">
+<div id="store-items">
+
+	<div id="store-inner">
+	
+		{{#if empty}}
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="empty">
+							<p><i class="fa fa-shopping-cart"></i></p>
+							<p>There are no items in your cart.</p>
+						</div>
+					</div><!--/col-md-12-->
+				</div><!--/row-->
+			</div><!--/container-->
+		{{else}}
+		
+			<div class="container">
+			
+				{{#items}}
+			
+					<div class="row clearfix item">
+				
+						<div class="col-md-12">
+						
+							<div class="icon pull-left"><a href="{{url}}"><img src="{{column_2}}"></a></div>
+							<div class="title pull-left">
+								{{#if sold_out}}
+									<a href="{{url}}"><del>{{title}}</del></a>
+									<p style="margin:0;">
+										<del>
+											{{name_a}}: {{name_b}}
+											{{#if sku}} ({{sku}}) {{/if}}
+										</del>
+									</p>
+								{{else}}
+									<a href="{{url}}">{{title}}</a>
+									<p style="margin:0;">
+										{{name_a}}: {{name_b}}
+										{{#if sku}} ({{sku}}) {{/if}}
+									</p>
+								{{/if}}
+								{{#if notes}}
+									<p>Notes: {{notes}}</p>
+								{{/if}}
+							</div>
+							<div class="qty pull-right">
+								<input class="string optional" data-cart="qty" data-item="{{variant_id}}" placeholder="0" size="20" type="text" value="{{quantity}}">
+							</div>
+							<div class="price pull-right">
+								{{formatted_price}}<br>
+								<span>
+								<a href="#" data-cart-function="remove" data-variant="{{variant_id}}"><i class="fa fa-times-circle"></i></a>
+								Qty: {{quantity}}
+								</span>
+							</div>
+							{{#if sold_out}}
+								<div style="text-align:right;"><span class="label label-danger" style="font-size:8pt;">SOLD OUT</span></div>
+							{{/if}}
+						
+						</div>
+				
+					</div><!--/row-->
+				
+				{{/items}}
+				
+				{{#if discounts_available }}
+				<div class="row">
+					<div class="col-md-12">
+						<input id="coupon_code" name="coupon_code" placeholder="Coupon code" size="20" type="text" value="{{coupon_code}}" class="pull-right" style="margin-bottom:20px;">
+					</div>
+				</div>
+				{{/if}}
+				
+				<div class="row">
+					<div class="col-md-12">
+						<a href="#" class="btn update pull-right" data-cart-function="update">Update</a>
+						<div class="pull-right sub-total">
+							<div class="intro">Sub-total</div>
+							<div class="price">{{formatted_total}}</div>
+						</div>
+					</div>
+				</div>
+			
+			</div><!--/container-->
+			
+			<div id="contact-prices">
+			
+				<div class="container">
+				
+					<div class="row">
+					
+						<div class="col-md-6">
+
+							{{#if has_name_and_address}}
+								<p>
+									<strong>ATT: {{first_name}} {{last_name}}</strong><br>
+									{{telephone_number}}
+								</p>
+								<p>
+									{{#if shipping_same_as_billing}}
+										{{billing_line1}}{{#if billing_line2}}, {{billing_line2}}{{/if}}<br>
+										{{billing_suburb}} {{billing_state_name}}<br>
+										{{billing_country_name}} {{billing_post_code}}
+									{{else}}
+										{{shipping_line1}}{{#if shipping_line2}}, {{shipping_line2}}{{/if}}<br>
+										{{shipping_suburb}} {{shipping_state_name}}<br>
+										{{shipping_country_name}} {{shipping_post_code}}
+									{{/if}}
+								</p>
+							{{else}}
+								{{#if signed_in}}
+									<p>Where shall we send your order?</p>
+								{{/if}}
+							{{/if}}
+
+						</div><!--/col-md-6-->
+						<div class="col-md-6">
+							<table>
+								<tr>
+									<td>Sub-total:</td>
+									<td>{{#if has_active_variants}}{{formatted_total}}{{else}}No active items!{{/if}}</td>
+								</tr>
+								<tr>
+									<td>Freight:</td>
+									<td>{{#if has_addresses}}{{formatted_shipping_and_handling}}{{else}}No delivery address!{{/if}}</td>
+								</tr>
+								{{#if has_discount}}
+									<tr>
+										<td>Discount:</td>
+										<td>{{formatted_discount}}</td>
+									</tr>
+								{{/if}}
+								<tr>
+									<td>Total:</td>
+									<td>{{formatted_grand_total}}</td>
+								</tr>
+							</table>
+						</div><!--/col-md-6-->
+					
+					</div><!--/row-->
+				
+				</div><!--/contact-prices-->
+			
+			</div><!--/contact-prices-->
+			
+			<div class="container" id="cart-actions">
+			
+				{{#if signed_in}}
+				
+				<div class="row">
+				
+					<div class="col-md-6">
+						<a href="#" class="btn show-detail-link" data-cart-screen="contact-details">{{#if has_addresses}}<i class="fa fa-pencil"></i> Change Details{{else}}Set Contact Details{{/if}}</a>
+						{{#if can_pay_later }}
+							<a href="#" class="btn mtl" data-cart-function="on_account">Pay later</a>
+						{{/if}}
+					</div><!--/col-md-6-->
+					
+					<div class="col-md-6 text-center">
+						{{#if can_pay}}
+							<a href="#" class="btn checkout hide" data-cart-screen="payment"><i class="fa fa-credit-card"></i> Pay Now</a>
+							<button style="width:100%;" class="btn" id="customButton" 
+								data-name="{{ account_organisation }}"
+								data-description="Order #{{ reference }} ({{ formatted_grand_total }})"
+								data-amount="{{ grand_total_in_cents }}"
+								data-key="{{ stripe_key }}"
+								data-image="https://melbourne-systems.s3.amazonaws.com/asset/file/53db412857817ebc3f00008c/diaries-direct-logo.jpg"
+								data-email="{{ user_email }}"
+								data-currency="AUD">
+								<i class="fa fa-credit-card"></i> Pay with Credit Card
+							</button>
+							{{#if accept_paypal}}
+								<img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" data-cart-function="paypal" class="mtl" style="cursor:pointer;">
+							{{/if}}
+						{{/if}}
+					</div><!--/col-md-6-->
+				
+				</div><!--/row-->
+				
+				<!--<div class="row">
+					<div class="col-md-12">
+						<button class="btn" id="customButton" 
+							data-name="{{ account_organisation }}"
+							data-description="Order #{{ reference }} ({{ formatted_grand_total }})"
+							data-amount="{{ grand_total_in_cents }}"
+							data-key="{{ stripe_key }}"
+							data-image="https://melbourne-systems.s3.amazonaws.com/asset/file/52e0b0cb57817e5b20000159/launchly-stripe-icon.png"
+							data-email="{{ user_email }}"
+							data-currency="AUD">
+							Purchase
+						</button>
+					</div>
+				</div>-->
+				
+				{{else}}
+				
+					<div class="col-md-12 sign_in_register">
+						<a href="{{sign_in_link}}" class="btn btn-warning" data-link="{{sign_in_link}}" onclick="newWindow=window.open('{{sign_in_link}}', 'loginwindow', 'height=600,width=940,status=yes'); if (window.focus) { newWindow.focus(); } return false;">
+							Sign in or Register to continue
+						</a>
+					</div><!--/col-md-12.sign_in_register-->
+				
+				{{/if}}
+			
+			</div><!--/container-->
+	
+		{{/if}}
+
+	</div>
+</div>
