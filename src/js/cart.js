@@ -1,6 +1,6 @@
 /*
  * launchly-cart
- * https://github.com/craig/launchly-cart
+ * https://github.com/launchly/launchly-cart
  *
  * Copyright (c) 2013 Craig Sullivan
  * Licensed under the MIT license.

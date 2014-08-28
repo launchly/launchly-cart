@@ -5,8 +5,8 @@ JQuery shopping cart plugin to launch.ly
 ## Getting Started
 Download the [production version][min] or the [development version][max].
 
-[min]: https://raw.github.com/craig/launchly-cart/master/dist/launchly-cart.min.js
-[max]: https://raw.github.com/craig/launchly-cart/master/dist/launchly-cart.js
+[min]: https://raw.github.com/launchly/launchly-cart/master/dist/launchly-cart.min.js
+[max]: https://raw.github.com/launchly/launchly-cart/master/dist/launchly-cart.js
 
 In your web page:
 
