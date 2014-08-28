@@ -13,7 +13,7 @@ module.exports = function(grunt) {
 			' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
 		// Task configuration.
 		clean: {
-			files: ['dist']
+			files: ['dist', 'build']
 		},
 		concat: {
 			options: {
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 				stripBanners: true
 			},
 			dist: {
-				src: ['src/<%= pkg.name %>.js'],
+				src: ['src/js/cart.js', 'src/js/events/*.js', 'src/js/handlers/*.js', 'src/js/initialise.js'],
 				dest: 'dist/<%= pkg.name %>.js'
 			}
 		},
@@ -82,6 +82,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	
 	// Default task.
-	grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify']);
-
+//	grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify']);
+	grunt.registerTask('default', ['jshint', 'clean', 'concat', 'uglify']);
 };

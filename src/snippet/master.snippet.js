@@ -15,6 +15,7 @@ $(document).ready(function() {
 	cart.secure_url = "{{ '/' | secure_url }}";
 	cart.authenticity_token = '{{ rails_authenticity_token }}';
 
+	/* TODO: pass in a URL of the templates that you want to use, and the css url */
 	cart.init();
 	cart.get();
 

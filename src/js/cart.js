@@ -385,8 +385,22 @@ var cart = {
 	},
 	
 	init: function() {
-		var templates = ['cart_checkout', 'cart_contact_details', 'cart_payment', 'cart_payment_failure', 'cart_payment_success', 'shopping_cart', 'state_select'];
+
+		/* TODO: Load CSS from URL */
+		/* TODO: Load Templates from URL */
+
+		var templates = [
+			'cart_checkout',
+			'cart_contact_details',
+			'cart_payment',
+			'cart_payment_failure',
+			'cart_payment_success',
+			'shopping_cart',
+			'state_select'
+		];
+
 		var totalTemplates = templates.length;
+
 		for (var i=0; i<totalTemplates; i++) {
 			var template = templates[i];
 			cart.fetch(template);
