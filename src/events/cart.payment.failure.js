@@ -1,4 +1,4 @@
-/* Cart Event: cart.payment.failure */
+/* global cart */
 
 jQuery(cart).on('cart.payment.failure', function(event, data) { 
 	jQuery('#cart-payment').modal('hide');	

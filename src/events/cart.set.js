@@ -1,4 +1,4 @@
-/* Cart Event: cart.set */
+/* global cart */
 
 jQuery(cart).on('cart.set', function() {
 	var cart_panel = jQuery('#shopping-cart');

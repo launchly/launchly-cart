@@ -1,4 +1,4 @@
-/* Cart Event: cart.paypal.confirm.failure */
+/* global cart */
 
 jQuery(cart).on('cart.paypal.confirm.failure', function(event, data) { 
 	data['has_paypal'] = true;

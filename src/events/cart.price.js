@@ -1,4 +1,4 @@
-/* Cart Event: cart.price */
+/* global cart */
 
 jQuery(cart).on('cart.price', function(event, price_check) { 
 	

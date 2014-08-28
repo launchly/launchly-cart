@@ -1,4 +1,4 @@
-/* Cart Event: cart.changed */
+/* global cart */
 
 jQuery(cart).on('cart.changed', function(event, current_cart) { 
 
@@ -18,6 +18,6 @@ jQuery(cart).on('cart.changed', function(event, current_cart) {
 	jQuery('#cart-contact-details-container').html(cart.cached['cart_contact_details'](current_cart) );
 	jQuery('#cart-payment-container').html(cart.cached['cart_payment'](current_cart) );
 	jQuery('#store-side').html(cart.cached['shopping_cart'](current_cart));
-	populate_states(jQuery('#billing_country'), 'billing', current_cart.billing_state);
+	cart.populate_states(jQuery('#billing_country'), 'billing', current_cart.billing_state);
 	jQuery('.cart-checkout').html(cart.cached['cart_checkout'](current_cart));
 });

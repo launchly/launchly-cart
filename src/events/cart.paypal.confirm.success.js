@@ -1,4 +1,4 @@
-/* Cart Event: cart.paypal.confirm.success */
+/* global cart */
 
 jQuery(cart).on('cart.paypal.confirm.success', function(event, data) { 
 	jQuery('#paypal-express-confirmation').hide();

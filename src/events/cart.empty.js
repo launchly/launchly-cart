@@ -1,4 +1,4 @@
-/* Cart Event: cart.empty */
+/* global cart */
 
 jQuery(cart).on('cart.empty', function() { 
 	if (typeof ga !== 'undefined') {

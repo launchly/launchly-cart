@@ -4,6 +4,7 @@
 
 {% javascript %}
 $(document).ready(function() {
+
 	{% if current_user.admin? %}
 		cart.canPayLater = true;
 	{% endif %}
@@ -16,5 +17,6 @@ $(document).ready(function() {
 
 	cart.init();
 	cart.get();
+
 });
 {% endjavascript %}
