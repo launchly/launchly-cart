@@ -12,6 +12,9 @@
   "eqnull": true,
   "browser": true,
   "predef": [
+    "ga",
+    "StripeCheckout",
+    "Handlebars",
     "jQuery",
     "QUnit",
     "module",
