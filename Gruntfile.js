@@ -74,6 +74,21 @@ module.exports = function(grunt) {
 				files: '<%= jshint.test.src %>',
 				tasks: ['jshint:test', 'qunit']
 			}
+		},
+		less: {
+			development: {
+				files: {
+					'dist/cart.css': 'src/less/cart.less'
+				}
+			},
+			production: {
+				options: {
+					cleancss: true
+				},
+				files: {
+					'dist/cart.min.css': 'src/less/cart.less'
+				}
+			}
 		}
 	});
 	
@@ -84,8 +99,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-qunit');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-less');
 	
 	// Default task.
 //	grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify']);
-	grunt.registerTask('default', ['jshint', 'clean', 'concat', 'uglify']);
+	grunt.registerTask('default', ['jshint', 'clean', 'concat', 'uglify', 'less']);
 };
