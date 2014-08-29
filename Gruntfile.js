@@ -23,6 +23,10 @@ module.exports = function(grunt) {
 			dist: {
 				src: ['src/js/cart.js', 'src/js/events/*.js', 'src/js/handlers/*.js', 'src/js/initialise.js'],
 				dest: 'dist/<%= pkg.name %>.js'
+			},
+			templates: {
+				src: ['src/templates/*.html'],
+				dest: 'dist/<%= pkg.name %>.templates.html'
 			}
 		},
 		uglify: {
