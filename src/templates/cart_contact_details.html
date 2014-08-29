@@ -1,0 +1,114 @@
+<script id="cart_contact_details-template" type="text/x-handlebars-template">
+	<div class="modal fade" id="cart-contact-details">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+
+					<div id="billing-form-placeholder">
+
+						<form role="form">
+
+							<div class="row">
+								<div class="col-md-12">
+									<a class="close" data-dismiss="modal">&times;</a>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="first_name">
+											<abbr title="required"></abbr> First Name
+										</label>
+										<input type="text" autofocus="autofocus" name="first_name" id="first_name" value="{{first_name}}" placeholder="First name" class="form-control" />
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="last_name">
+											<abbr title="required">*</abbr> Last Name
+										</label>
+										<input type="text" name="last_name" id="last_name" value="{{last_name}}" placeholder="Last name" class="form-control" />
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="telephone_number">Telephone Number</label>
+										<input type="text" name="telephone_number" id="telephone_number" value="{{telephone_number}}" placeholder="Contact phone number" class="form-control" />
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<select name="billing_country" id="billing_country">
+											<option value="">- select country -</option>
+											{{#countries}}
+												<option value="{{a2}}"{{#if billing_country }} selected{{/if}}>{{name}}</option>
+											{{/countries}}
+										</select>
+									</div>
+								</div>
+									<div class="col-md-8">
+										<div class="form-group">
+											<div id="state-billing-select-placeholder"></div>
+										</div>
+									</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="billing_line1"><abbr title="required">*</abbr> Address</label>
+										<input type="text" name="billing_line1" id="billing_line1" value="{{billing_line1}}" placeholder="Address" class="form-control" />
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<input type="text" name="billing_line2" id="billing_line2" value="{{billing_line2}}" class="form-control" />
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="billing_suburb"><abbr title="required">*</abbr> City/Suburb</label>
+										<input type="text" name="billing_suburb" id="billing_suburb" value="{{billing_suburb}}" placeholder="City/Suburb" class="form-control" />
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="billing_post_code"><abbr title="required">*</abbr> Post Code</label>
+										<input type="text" name="billing_post_code" id="billing_post_code" value="{{billing_post_code}}" placeholder="Post Code" class="form-control" />
+									</div>
+								</div>
+							</div>
+
+						</form>
+
+
+					</div>
+
+				</div>
+
+				<div class="modal-footer">
+					<div class="pull-left">
+						<a href="#" class="btn" data-dismiss="modal">Close</a>
+					</div>
+					<div class="pull-right">
+						<a href="#" class="btn btn-success" data-cart-function="update">Update Details</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</script>

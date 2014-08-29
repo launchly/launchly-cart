@@ -47,7 +47,6 @@ var cart = {
 	user_email: '',
 	stripe_key: '',
 	secure_url: '',
-	authenticity_token: '',
 	templates_path: '',
 	css_path: '',
 	
@@ -65,7 +64,7 @@ var cart = {
 	
 	/* empty the shopping cart */
 	empty: function() {
-		jQuery.get("/__/cart/empty.json", { authenticity_token: cart.authenticity_token }, function(data) {
+		jQuery.get("/__/cart/empty.json", { authenticity_token: rails_authenticity_token }, function(data) {
 			jQuery(cart).trigger('cart.changed', [data]);
 			jQuery(cart).trigger('cart.empty', [data]);
 		});
@@ -73,7 +72,7 @@ var cart = {
 
 	/* get the current shopping cart */
 	get: function(element, callback) {
-		jQuery.get("/__/cart.json", { authenticity_token: cart.authenticity_token }, function(data) { 
+		jQuery.get("/__/cart.json", { authenticity_token: rails_authenticity_token }, function(data) { 
 			jQuery(cart).trigger('cart.changed', [data]);
 			jQuery(cart).trigger('cart.get', [data]);
 			if (callback) { callback(); }
@@ -130,7 +129,7 @@ var cart = {
 		var note = cart.note(i_id);
 
 		var data = {
-			'authenticity_token': cart.authenticity_token,
+			'authenticity_token': rails_authenticity_token,
 			'v': []
 		};
 
@@ -259,7 +258,7 @@ var cart = {
 		if (!(qty === '' || isNaN(parseInt(qty, 10)))) {
 			
 			jQuery.getJSON('/__/price_check/' + cart.variant_id(i_id) + '/' + qty + '.json',
-				{ authenticity_token: cart.authenticity_token },
+				{ authenticity_token: rails_authenticity_token },
 				function(data) { 
 					jQuery(cart).trigger('cart.price', [data]);
 				}
@@ -311,7 +310,7 @@ var cart = {
 	
 	update: function() {
 		var data = {
-			'authenticity_token': cart.authenticity_token,
+			'authenticity_token': rails_authenticity_token,
 			'v': [],
 			'billing_line1': jQuery('#billing_line1').val(),
 			'billing_line2': jQuery('#billing_line2').val(),
@@ -381,7 +380,6 @@ var cart = {
 	},
 	
 	init: function(options) {
-
 		if ( typeof options.templates_path !== 'undefined') { cart.templates_path = options.templates_path; }
 		if ( typeof options.css_path !== 'undefined') { cart.css_path = options.css_path; }
 		
@@ -390,7 +388,12 @@ var cart = {
 	},
 	
 	loadTemplates: function() {
-		jQuery.get(cart.templates_path, function(data) {
+		console.log('loadTemplates');
+		console.log(cart.templates_path);
+		
+		jQuery.ajax({
+			url: cart.templates_path
+		}).done(function(data) {
 			jQuery('body').append( data );
 			
 			var templates = [
@@ -404,10 +407,11 @@ var cart = {
 			];
 			
 			var totalTemplates = templates.length;
-
+			
 			for (var i=0; i<totalTemplates; i++) {
 				var template = templates[i];
-				var source = jQuery('#' + template + '-template').html();
+				var selector = '#' + template + '-template';
+				var source = jQuery(selector).html();
 				cart.store(template, source);
 			}
 		});
@@ -415,6 +419,10 @@ var cart = {
 	
 	loadCSS: function() {
 		jQuery('head').append( jQuery('<link rel="stylesheet" type="text/css">').attr('href', cart.css_path) );
+	},
+	
+	store: function(name, raw) {
+		cart.cached[name] = Handlebars.compile(raw);
 	},
 	
 	render: function(name, context, selector) {

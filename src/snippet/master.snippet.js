@@ -1,6 +1,6 @@
 {{ 'asset/file/51e4943d57817ea0e50000b1/handlebars.js' | asset_url | javascript_include }}
 {{ 'https://checkout.stripe.com/checkout.js' | javascript_include }}
-{{ '/launchly-cart.js' | javascript_include }}
+{{ 'http://local.dev/spitfire/cart/launchly-cart.min.js' | javascript_include }}
 
 {% javascript %}
 $(document).ready(function() {
@@ -13,11 +13,10 @@ $(document).ready(function() {
 	cart.user_email = '{{ current_user.email }}';
 	cart.stripe_key = '{{ account.payment_gateway.stripe_key }}';
 	cart.secure_url = "{{ '/' | secure_url }}";
-	cart.authenticity_token = '{{ rails_authenticity_token }}';
 
 	cart.init({
-		templates_path: '/launchly-cart-templates.html',
-		css_path: '/cart.min.css'
+		templates_path: 'http://local.dev/spitfire/cart/launchly-cart.templates.html',
+		css_path: 'http://local.dev/spitfire/cart/cart.min.css'
 	});
 	
 	cart.get();

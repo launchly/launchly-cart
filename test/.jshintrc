@@ -15,6 +15,7 @@
     "ga",
     "StripeCheckout",
     "Handlebars",
+    "rails_authenticity_token",
     "jQuery",
     "QUnit",
     "module",

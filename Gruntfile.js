@@ -16,11 +16,11 @@ module.exports = function(grunt) {
 			files: ['dist', 'build']
 		},
 		concat: {
-			options: {
-				banner: '<%= banner %>',
-				stripBanners: true
-			},
 			dist: {
+				options: {
+					banner: '<%= banner %>',
+					stripBanners: true
+				},
 				src: ['src/js/cart.js', 'src/js/events/*.js', 'src/js/handlers/*.js', 'src/js/initialise.js'],
 				dest: 'dist/<%= pkg.name %>.js'
 			},
