@@ -388,9 +388,6 @@ var cart = {
 	},
 	
 	loadTemplates: function() {
-		console.log('loadTemplates');
-		console.log(cart.templates_path);
-		
 		jQuery.ajax({
 			url: cart.templates_path
 		}).done(function(data) {
@@ -443,7 +440,7 @@ var cart = {
 			var uri = '/__/countries/' + country + '/entities.json';
 			jQuery.get(uri, function(data) {
 				context = { states: data.regions, type: name };
-				el.html(cart.cached['state_select'](context));
+				el.html(cart.cached_template('state_select', context));
 				if (selectedState) { jQuery('#billing_state').val( selectedState ); }
 			});
 		}
@@ -454,6 +451,10 @@ var cart = {
 		jQuery('#payment_type').val(payment_type);
 		jQuery(".payment-icon[data-type='" + payment_type + "']").fadeTo('fast', 1);
 		jQuery(".payment-icon:not([data-type='" + payment_type + "'])").fadeTo('slow', 0.2);
+	},
+	
+	cached_template: function(template_name, data) {
+		return this.cached[template_name](data);
 	}
 
 };

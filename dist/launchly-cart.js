@@ -1,6 +1,7 @@
-/*! launch.ly Shopping Cart - v0.0.1 - 2014-08-29
-* https://github.com/launchly/launchly-cart
-* Copyright (c) 2014 Craig Sullivan; Licensed MIT */
+/* launch.ly Shopping Cart - v0.0.1 - 2014-08-29
+ * https://github.com/launchly/launchly-cart
+ * Copyright (c) 2014 Craig Sullivan; Licensed MIT */
+
 /* List of cart methods
  * ------------
  *
@@ -383,9 +384,6 @@ var cart = {
 	},
 	
 	loadTemplates: function() {
-		console.log('loadTemplates');
-		console.log(cart.templates_path);
-		
 		jQuery.ajax({
 			url: cart.templates_path
 		}).done(function(data) {
@@ -438,7 +436,7 @@ var cart = {
 			var uri = '/__/countries/' + country + '/entities.json';
 			jQuery.get(uri, function(data) {
 				context = { states: data.regions, type: name };
-				el.html(cart.cached['state_select'](context));
+				el.html(cart.cached_template('state_select', context));
 				if (selectedState) { jQuery('#billing_state').val( selectedState ); }
 			});
 		}
@@ -449,6 +447,10 @@ var cart = {
 		jQuery('#payment_type').val(payment_type);
 		jQuery(".payment-icon[data-type='" + payment_type + "']").fadeTo('fast', 1);
 		jQuery(".payment-icon:not([data-type='" + payment_type + "'])").fadeTo('slow', 0.2);
+	},
+	
+	cached_template: function(template_name, data) {
+		return this.cached[template_name](data);
 	}
 
 };
@@ -467,13 +469,12 @@ jQuery(cart).on('cart.changed', function(event, current_cart) {
 	current_cart.user_email = cart.user_email;
 	current_cart.stripe_key = cart.stripe_key;
 
-	jQuery('#cart-contact-details-container').html(cart.cached['cart_contact_details'](current_cart) );
-	jQuery('#cart-payment-container').html(cart.cached['cart_payment'](current_cart) );
-	jQuery('#store-side').html(cart.cached['shopping_cart'](current_cart));
+	jQuery('#cart-contact-details-container').html(cart.cached_template('cart_contact_details', current_cart) );
+	jQuery('#cart-payment-container').html(cart.cached_template('cart_payment', current_cart) );
+	jQuery('#store-side').html(cart.cached_template('shopping_cart', current_cart));
 	cart.populate_states(jQuery('#billing_country'), 'billing', current_cart.billing_state);
-	jQuery('.cart-checkout').html(cart.cached['cart_checkout'](current_cart));
+	jQuery('.cart-checkout').html(cart.cached_template('cart_checkout', current_cart));
 });
-
 jQuery(cart).on('cart.empty', function() { 
 	if (typeof ga !== 'undefined') {
 		ga('ec:setAction', 'empty');
@@ -491,14 +492,14 @@ jQuery(cart).on('cart.on_account.success', function(event, data) {
 jQuery(cart).on('cart.payment.failure', function(event, data) { 
 	jQuery('#cart-payment').modal('hide');	
 	jQuery('#cart-payment-processing-placeholder').modal('hide');
-	jQuery('#cart-payment-failure-container').html(cart.cached['cart_payment_failure'](data));
+	jQuery('#cart-payment-failure-container').html(cart.cached_template('cart_payment_failure', data));
 	jQuery('#cart-payment-failure-placeholder').modal({ backdrop: false });
 });
 
 jQuery(cart).on('cart.payment.success', function(event, data) {
 	jQuery('#cart-payment').modal('hide');	
 	jQuery('#cart-payment-processing-placeholder').modal('hide');
-	jQuery('#cart-payment-success-container').html(cart.cached['cart_payment_failure'](data));
+	jQuery('#cart-payment-success-container').html(cart.cached_template('cart_payment_failure', data));
 	jQuery('#cart-payment-success-placeholder').modal({ backdrop: false });
 	cart.get();
 	cart.track_order(data);
