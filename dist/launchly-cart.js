@@ -43,6 +43,8 @@ var cart = {
 	stripe_key: '',
 	secure_url: '',
 	authenticity_token: '',
+	templates_path: '',
+	css_path: '',
 	
 	/* do a particular cart function */
 	do: function(element) {		
@@ -373,41 +375,41 @@ var cart = {
 		}
 	},
 	
-	fetch: function(name) {
-		jQuery.get(cart.urlFor(name), function(data) {
-			cart.store(name, data);
+	init: function(options) {
+
+		if ( typeof options.templates_path !== 'undefined') { cart.templates_path = options.templates_path; }
+		if ( typeof options.css_path !== 'undefined') { cart.css_path = options.css_path; }
+		
+		cart.loadCSS();
+		cart.loadTemplates();
+	},
+	
+	loadTemplates: function() {
+		jQuery.get(cart.templates_path, function(data) {
+			jQuery('body').append( data );
+			
+			var templates = [
+				'cart_checkout',
+				'cart_contact_details',
+				'cart_payment',
+				'cart_payment_failure',
+				'cart_payment_success',
+				'shopping_cart',
+				'state_select'
+			];
+			
+			var totalTemplates = templates.length;
+
+			for (var i=0; i<totalTemplates; i++) {
+				var template = templates[i];
+				var source = jQuery('#' + template + '-template').html();
+				cart.store(template, source);
+			}
 		});
 	},
 	
-	init: function() {
-
-		/* TODO: Load CSS from URL */
-		/* TODO: Load Templates from URL */
-
-		var templates = [
-			'cart_checkout',
-			'cart_contact_details',
-			'cart_payment',
-			'cart_payment_failure',
-			'cart_payment_success',
-			'shopping_cart',
-			'state_select'
-		];
-
-		var totalTemplates = templates.length;
-
-		for (var i=0; i<totalTemplates; i++) {
-			var template = templates[i];
-			cart.fetch(template);
-		}
-	},
-	
-	urlFor: function(name) {
-		return '/templates/' + name + '.handlebars';
-	},
-	
-	store: function(name, raw) {
-		cart.cached[name] = Handlebars.compile(raw);
+	loadCSS: function() {
+		jQuery('head').append( jQuery('<link rel="stylesheet" type="text/css">').attr('href', cart.css_path) );
 	},
 	
 	render: function(name, context, selector) {
