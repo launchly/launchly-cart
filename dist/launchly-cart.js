@@ -392,7 +392,7 @@ var cart = {
 		cart.loadTemplates(callback);
 	},
 	
-	loadTemplates: function(callback) {
+	loadTemplates: function() {
 		jQuery.ajax({
 			url: cart.templates_path
 		}).done(function(data) {
@@ -408,7 +408,7 @@ var cart = {
 				cart.store(template, source);
 			}
 			
-			if (typeof callback === 'function') { callback(); }
+			jQuery(cart).trigger('cart.ready');
 		});
 	},
 	
@@ -536,6 +536,10 @@ jQuery(cart).on('cart.price', function(event, price_check) {
 	} else {
 		jQuery('#item_' + price_check.item_id + '_was_price').html("&nbsp;");
 	}
+});
+
+jQuery(cart).on('cart.ready', function() {
+	cart.get();
 });
 
 jQuery(cart).on('cart.set', function() {

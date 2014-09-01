@@ -396,7 +396,7 @@ var cart = {
 		cart.loadTemplates(callback);
 	},
 	
-	loadTemplates: function(callback) {
+	loadTemplates: function() {
 		jQuery.ajax({
 			url: cart.templates_path
 		}).done(function(data) {
@@ -412,7 +412,7 @@ var cart = {
 				cart.store(template, source);
 			}
 			
-			if (typeof callback === 'function') { callback(); }
+			jQuery(cart).trigger('cart.ready');
 		});
 	},
 	
