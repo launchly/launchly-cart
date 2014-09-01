@@ -57,7 +57,7 @@ var cart = {
 	
 	/* do a particular cart function */
 	do: function(element) {		
-		cart[element.data('cart-function')](element);		
+		cart[element.data('cart-function')](element);
 	},
 
 	dec: function(element) {
@@ -384,12 +384,12 @@ var cart = {
 		}
 	},
 	
-	init: function(options) {
+	init: function(options, callback) {
 		if ( typeof options.templates_path !== 'undefined') { cart.templates_path = options.templates_path; }
 		if ( typeof options.css_path !== 'undefined') { cart.css_path = options.css_path; }
 		
 		cart.loadCSS();
-		cart.loadTemplates();
+		cart.loadTemplates(callback);
 	},
 	
 	loadTemplates: function(callback) {
@@ -417,8 +417,7 @@ var cart = {
 	},
 	
 	store: function(name, raw) {
-		// cart.cached[name] = Handlebars.compile( raw );
-		cart.cached[name] = raw;
+		cart.cached[name] = Handlebars.compile( raw );
 	},
 	
 	render: function(name, context, selector) {
@@ -453,26 +452,12 @@ var cart = {
 	},
 	
 	cached_template: function(template_name, data) {
-		if ( cart.cachedSize( cart.cached ) === 0) {
-			cart.loadTemplates(function() {
-				cart.cached_template( template_name, data );
-			});
-		}
-		
-		var source = ( cart.cached[ template_name ] ) ? cart.cached[ template_name ] : '';
-		var template = Handlebars.compile( source );
-		var html = template(data);
-		return html;
+		return cart.cached[template_name](data);
 	},
 	
-	cachedSize: function(obj) {
-		var size = 0;
-		for (var key in obj) {
-			if ( obj.hasOwnProperty(key)) { size++; }
-		}
-		return size;
+	toggle: function() {
+		jQuery('#shopping-cart').toggleClass('cbp-spmenu-open');
 	}
-
 };
 jQuery(cart).on('cart.changed', function(event, current_cart) { 
 
