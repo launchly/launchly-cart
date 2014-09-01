@@ -1,4 +1,4 @@
-/* launch.ly Shopping Cart - v0.0.1 - 2014-08-29
+/* launch.ly Shopping Cart - v0.0.1 - 2014-09-01
  * https://github.com/launchly/launchly-cart
  * Copyright (c) 2014 Craig Sullivan; Licensed MIT */
 
@@ -45,6 +45,15 @@ var cart = {
 	secure_url: '',
 	templates_path: '',
 	css_path: '',
+	templates: [
+		'cart_checkout',
+		'cart_contact_details',
+		'cart_payment',
+		'cart_payment_failure',
+		'cart_payment_success',
+		'shopping_cart',
+		'state_select'
+	],
 	
 	/* do a particular cart function */
 	do: function(element) {		
@@ -383,30 +392,23 @@ var cart = {
 		cart.loadTemplates();
 	},
 	
-	loadTemplates: function() {
+	loadTemplates: function(callback) {
 		jQuery.ajax({
 			url: cart.templates_path
 		}).done(function(data) {
 			jQuery('body').append( data );
-			
-			var templates = [
-				'cart_checkout',
-				'cart_contact_details',
-				'cart_payment',
-				'cart_payment_failure',
-				'cart_payment_success',
-				'shopping_cart',
-				'state_select'
-			];
-			
-			var totalTemplates = templates.length;
+
+			var totalTemplates = cart.templates.length;
+			cart.cached = {};
 			
 			for (var i=0; i<totalTemplates; i++) {
-				var template = templates[i];
+				var template = cart.templates[i];
 				var selector = '#' + template + '-template';
 				var source = jQuery(selector).html();
 				cart.store(template, source);
 			}
+			
+			if (typeof callback === 'function') { callback(); }
 		});
 	},
 	
@@ -415,7 +417,8 @@ var cart = {
 	},
 	
 	store: function(name, raw) {
-		cart.cached[name] = Handlebars.compile(raw);
+		// cart.cached[name] = Handlebars.compile( raw );
+		cart.cached[name] = raw;
 	},
 	
 	render: function(name, context, selector) {
@@ -450,7 +453,24 @@ var cart = {
 	},
 	
 	cached_template: function(template_name, data) {
-		return this.cached[template_name](data);
+		if ( cart.cachedSize( cart.cached ) === 0) {
+			cart.loadTemplates(function() {
+				cart.cached_template( template_name, data );
+			});
+		}
+		
+		var source = ( cart.cached[ template_name ] ) ? cart.cached[ template_name ] : '';
+		var template = Handlebars.compile( source );
+		var html = template(data);
+		return html;
+	},
+	
+	cachedSize: function(obj) {
+		var size = 0;
+		for (var key in obj) {
+			if ( obj.hasOwnProperty(key)) { size++; }
+		}
+		return size;
 	}
 
 };
