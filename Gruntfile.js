@@ -89,6 +89,22 @@ module.exports = function(grunt) {
 					'dist/cart.min.css': 'src/less/cart.less'
 				}
 			}
+		},
+		copy: {
+			main: {
+				expand: true,
+				flatten: true,
+				src: 'dist/*',
+				dest: 'releases/<%= pkg.version %>/'
+			}
+		},
+		build: {
+			tasks: ['default'],
+			packageConfig: 'pkg',
+			packages: '*.json',
+			jsonSpace: 2,
+			jsonReplacer: undefined,
+			gitAdd: '--all'
 		}
 	});
 	
@@ -100,8 +116,10 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-bump-build-git');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	
 	// Default task.
 //	grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify']);
-	grunt.registerTask('default', ['jshint', 'clean', 'concat', 'uglify', 'less']);
+	grunt.registerTask('default', ['jshint', 'clean', 'concat', 'uglify', 'less', 'copy']);
 };
