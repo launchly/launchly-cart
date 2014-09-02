@@ -90,6 +90,12 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		copy: {
+			main: {
+				src: 'dist/*',
+				dest: 'releases/<%= pkg.version %>/'
+			}
+		},
 		build: {
 			tasks: ['default'],
 			packageConfig: 'pkg',
@@ -109,8 +115,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-bump-build-git');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	
 	// Default task.
 //	grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify']);
-	grunt.registerTask('default', ['jshint', 'clean', 'concat', 'uglify', 'less']);
+	grunt.registerTask('default', ['jshint', 'clean', 'concat', 'uglify', 'less', 'copy']);
 };
