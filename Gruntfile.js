@@ -92,6 +92,8 @@ module.exports = function(grunt) {
 		},
 		copy: {
 			main: {
+				expand: true,
+				flatten: true,
 				src: 'dist/*',
 				dest: 'releases/<%= pkg.version %>/'
 			}
