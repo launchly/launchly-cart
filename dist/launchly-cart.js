@@ -1,4 +1,4 @@
-/* launch.ly Shopping Cart - v0.0.1 - 2014-09-01
+/* launch.ly Shopping Cart - v0.0.1 - 2014-09-02
  * https://github.com/launchly/launchly-cart
  * Copyright (c) 2014 Craig Sullivan; Licensed MIT */
 
@@ -635,11 +635,6 @@ jQuery(document).on('click', '#customButton', function(event) {
 		});
 	
 	event.preventDefault();
-});
-
-jQuery(document).on('click', '.show-hide-cart', function(event) {
-	event.preventDefault();
-	jQuery('#shopping-cart').toggleClass('cbp-spmenu-open');
 });
 
 if (typeof ga !== 'undefined') {

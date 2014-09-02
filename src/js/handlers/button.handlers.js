@@ -88,8 +88,3 @@ jQuery(document).on('click', '#customButton', function(event) {
 	
 	event.preventDefault();
 });
-
-jQuery(document).on('click', '.show-hide-cart', function(event) {
-	event.preventDefault();
-	jQuery('#shopping-cart').toggleClass('cbp-spmenu-open');
-});
