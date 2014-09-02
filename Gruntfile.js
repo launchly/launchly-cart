@@ -89,6 +89,14 @@ module.exports = function(grunt) {
 					'dist/cart.min.css': 'src/less/cart.less'
 				}
 			}
+		},
+		build: {
+			tasks: ['default'],
+			packageConfig: 'pkg',
+			packages: '*.json',
+			jsonSpace: 2,
+			jsonReplacer: undefined,
+			gitAdd: '--all'
 		}
 	});
 	
@@ -100,6 +108,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-bump-build-git');
 	
 	// Default task.
 //	grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify']);
