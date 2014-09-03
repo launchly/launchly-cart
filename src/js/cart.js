@@ -406,6 +406,7 @@ var cart = {
 	},
 	
 	init: function(options) {
+
 		if ( typeof options.can_pay_later !== 'undefined') { cart.can_pay_later = options.can_pay_later; }
 		if ( typeof options.account_organisation !== 'undefined') { cart.account_organisation = options.account_organisation; }
 		if ( typeof options.user_email !== 'undefined') { cart.user_email = options.user_email; }

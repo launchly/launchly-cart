@@ -2,7 +2,7 @@
   "name": "launchly-cart",
   "title": "launch.ly Shopping Cart",
   "description": "JQuery shopping cart plugin to launch.ly",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "homepage": "https://github.com/launchly/launchly-cart",
   "author": {
     "name": "Craig Sullivan",
