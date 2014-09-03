@@ -13,29 +13,29 @@ module.exports = function(grunt) {
 			' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n\n',
 		// Task configuration.
 		clean: {
-			files: ['dist']
+			files: ['latest']
 		},
 		concat: {
-			dist: {
+			latest: {
 				options: {
 					banner: '<%= banner %>',
 					stripBanners: true
 				},
 				src: ['src/js/cart.js', 'src/js/events/*.js', 'src/js/handlers/*.js', 'src/js/initialise.js'],
-				dest: 'dist/<%= pkg.name %>.js'
+				dest: 'latest/<%= pkg.name %>.js'
 			},
 			templates: {
 				src: ['src/templates/*.html'],
-				dest: 'dist/<%= pkg.name %>.templates.html'
+				dest: 'latest/<%= pkg.name %>.templates.html'
 			}
 		},
 		uglify: {
 			options: {
 				banner: '<%= banner %>'
 			},
-			dist: {
-				src: '<%= concat.dist.dest %>',
-				dest: 'dist/<%= pkg.name %>.min.js'
+			latest: {
+				src: '<%= concat.latest.dest %>',
+				dest: 'latest/<%= pkg.name %>.min.js'
 			}
 		},
 		qunit: {
@@ -78,7 +78,7 @@ module.exports = function(grunt) {
 		less: {
 			development: {
 				files: {
-					'dist/cart.css': 'src/less/cart.less'
+					'latest/cart.css': 'src/less/cart.less'
 				}
 			},
 			production: {
@@ -86,7 +86,7 @@ module.exports = function(grunt) {
 					cleancss: true
 				},
 				files: {
-					'dist/cart.min.css': 'src/less/cart.less'
+					'latest/cart.min.css': 'src/less/cart.less'
 				}
 			}
 		},
@@ -94,7 +94,7 @@ module.exports = function(grunt) {
 			main: {
 				expand: true,
 				flatten: true,
-				src: 'dist/*',
+				src: 'latest/*',
 				dest: 'releases/<%= pkg.version %>/'
 			}
 		},

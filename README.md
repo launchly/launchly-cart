@@ -26,5 +26,14 @@ _(Coming soon)_
 ## Examples
 _(Coming soon)_
 
-## Release History
-_(Nothing yet)_
+## Releases
+
+This project uses [Bump Build](https://github.com/blueimp/grunt-bump-build-git) to change version numbers
+
+Here is a quick cheat sheet ...
+
+grunt build:major
+grunt build:minor
+grunt build:patch
+
+run **grunt build** to generate a release
