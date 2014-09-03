@@ -52,7 +52,8 @@ var cart = {
 		'cart_payment_failure',
 		'cart_payment_success',
 		'shopping_cart',
-		'state_select'
+		'state_select',
+		'cart_components'
 	],
 	
 	/* do a particular cart function */
@@ -384,12 +385,12 @@ var cart = {
 		}
 	},
 	
-	init: function(options, callback) {
+	init: function(options) {
 		if ( typeof options.templates_path !== 'undefined') { cart.templates_path = options.templates_path; }
 		if ( typeof options.css_path !== 'undefined') { cart.css_path = options.css_path; }
 		
 		cart.loadCSS();
-		cart.loadTemplates(callback);
+		cart.loadTemplates();
 	},
 	
 	loadTemplates: function() {
@@ -408,8 +409,16 @@ var cart = {
 				cart.store(template, source);
 			}
 			
+			cart.loadComponents();
+			
 			jQuery(cart).trigger('cart.ready');
 		});
+	},
+	
+	loadComponents: function() {
+		var context = {};
+		var html = cart.cached_template('cart_components', context);
+		jQuery('body').append(html);
 	},
 	
 	loadCSS: function() {
