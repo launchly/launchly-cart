@@ -201,20 +201,29 @@
 
 					<div class="col-md-6 text-center">
 						{{#if can_pay}}
-							<a href="#" class="btn checkout hide" data-cart-screen="payment"><i class="fa fa-credit-card"></i> Pay Now</a>
-							<button style="width:100%;" class="btn" id="customButton" 
-								data-name="{{ account_organisation }}"
-								data-description="Order #{{ reference }} ({{ formatted_grand_total }})"
-								data-amount="{{ grand_total_in_cents }}"
-								data-key="{{ stripe_key }}"
-								data-image="https://melbourne-systems.s3.amazonaws.com/asset/file/53db412857817ebc3f00008c/diaries-direct-logo.jpg"
-								data-email="{{ user_email }}"
-								data-currency="AUD">
-								<i class="fa fa-credit-card"></i> Pay with Credit Card
-							</button>
+
+
+							{{#if uses_stripe}}
+								<button style="width:100%;" class="btn" id="pay-by-stripe" 
+									data-name="{{ account_organisation }}"
+									data-description="Order #{{ reference }} ({{ formatted_grand_total }})"
+									data-amount="{{ grand_total_in_cents }}"
+									data-key="{{ stripe_key }}"
+									data-image="https://d1adef9hr2r55o.cloudfront.net/images/launchly-stripe-icon.png"
+									data-email="{{ user_email }}"
+									data-currency="AUD">
+									<i class="fa fa-credit-card"></i> Pay with Credit Card
+								</button>
+							{{else}}
+								{{#if accept_payment_card }}
+									<a href="#" class="btn checkout" data-cart-screen="payment"><i class="fa fa-credit-card"></i> Pay Now</a>
+								{{/if}}
+							{{/if}}
+
 							{{#if accept_paypal}}
 								<img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" data-cart-function="paypal" class="mtl" style="cursor:pointer;">
 							{{/if}}
+
 						{{/if}}
 					</div>
 

@@ -58,7 +58,7 @@ jQuery(document).on('change', '#card_number', function() { cart.select_payment_t
 /* manually selecting a payment type */
 jQuery(document).on('click', '.payment-icon', function() { cart.select_payment_type(jQuery(this).data('type')); });
 
-jQuery(document).on('click', '#customButton', function(event) {
+jQuery(document).on('click', '#pay-by-stripe', function(event) {
 	var btn = jQuery(this);
 	var btnText = btn.text();
 	btn.text('Loading').attr('disabled', 'disabled');
