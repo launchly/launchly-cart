@@ -43,14 +43,14 @@ $(document).ready(function() {
 
 	cart.init({
 		{% if current_user.admin? %}
-			can_pay_later: true,
+		can_pay_later: 				true,
 		{% endif %}
 		account_organisation: '{{ account.organisation.name }}',
-		user_email: '{{ current_user.email }}',
-		stripe_key: '{{ account.payment_gateway.stripe_key }}',
-		secure_url: "{{ '/' | secure_url }}",
-		templates_path: 'https://d1adef9hr2r55o.cloudfront.net/latest/launchly-cart.templates.html',
-		css_path: 'https://d1adef9hr2r55o.cloudfront.net/latest/cart.min.css'
+		user_email:						'{{ current_user.email }}',
+		stripe_key:						'{{ account.payment_gateway.stripe_key }}',
+		secure_url:						'{{ '/' | secure_url }}',
+		templates_path:				'https://d1adef9hr2r55o.cloudfront.net/latest/launchly-cart.templates.html',
+		css_path:							'https://d1adef9hr2r55o.cloudfront.net/latest/cart.min.css'
 	});
 
 });
