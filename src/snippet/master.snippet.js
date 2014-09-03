@@ -1,6 +1,6 @@
-{{ 'asset/file/51e4943d57817ea0e50000b1/handlebars.js' | asset_url | javascript_include }}
+{{ '//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.4/handlebars.min.js' | javascript_include }}
 {{ 'https://checkout.stripe.com/checkout.js' | javascript_include }}
-{{ 'http://local.dev/spitfire/cart/launchly-cart.min.js' | javascript_include }}
+{{ 'https://d1adef9hr2r55o.cloudfront.net/latest/launchly-cart.min.js' | javascript_include }}
 
 {% javascript %}
 $(document).ready(function() {
@@ -15,8 +15,8 @@ $(document).ready(function() {
 	cart.secure_url = "{{ '/' | secure_url }}";
 
 	cart.init({
-		css_path: 		'http://local.dev/spitfire/cart/cart.min.css',
-		templates_path: 'http://local.dev/spitfire/cart/launchly-cart.templates.html'
+		css_path: 		'https://d1adef9hr2r55o.cloudfront.net/latest/cart.min.css',
+		templates_path: 'https://d1adef9hr2r55o.cloudfront.net/latest/launchly-cart.templates.html'
 	});
 
 });
