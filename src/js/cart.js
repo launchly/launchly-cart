@@ -41,7 +41,7 @@ var cart = {
 
 	billingCountry: '',
 	billingState: '',
-	canPayLater: false,
+	can_pay_later: false,
 	cached: {},
 	account_organisation: '',
 	user_email: '',
@@ -390,6 +390,11 @@ var cart = {
 	},
 	
 	init: function(options) {
+		if ( typeof options.can_pay_later !== 'undefined') { cart.can_pay_later = options.can_pay_later; }
+		if ( typeof options.account_organisation !== 'undefined') { cart.account_organisation = options.account_organisation; }
+		if ( typeof options.user_email !== 'undefined') { cart.user_email = options.user_email; }
+		if ( typeof options.stripe_key !== 'undefined') { cart.stripe_key = options.stripe_key; }
+		if ( typeof options.secure_url !== 'undefined') { cart.secure_url = options.secure_url; }
 		if ( typeof options.templates_path !== 'undefined') { cart.templates_path = options.templates_path; }
 		if ( typeof options.css_path !== 'undefined') { cart.css_path = options.css_path; }
 		

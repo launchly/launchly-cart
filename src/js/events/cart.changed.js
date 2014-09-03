@@ -9,7 +9,7 @@ jQuery(cart).on('cart.changed', function(event, current_cart) {
 		current_cart.expiry_years.push(currentYear + i);
 	}
 	
-	current_cart['can_pay_later'] = cart.canPayLater;
+	current_cart['can_pay_later'] = cart.can_pay_later;
 	
 	current_cart.account_organisation = cart.account_organisation;
 	current_cart.user_email = cart.user_email;

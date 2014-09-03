@@ -41,16 +41,14 @@ For handlebars, you can access a CDN at http://cdnjs.com/libraries/handlebars.js
 {% javascript %}
 $(document).ready(function() {
 
-	{% if current_user.admin? %}
-		cart.canPayLater = true;
-	{% endif %}
-
-	cart.account_organisation = '{{ account.organisation.name }}';
-	cart.user_email = '{{ current_user.email }}';
-	cart.stripe_key = '{{ account.payment_gateway.stripe_key }}';
-	cart.secure_url = "{{ '/' | secure_url }}";
-
 	cart.init({
+		{% if current_user.admin? %}
+			can_pay_later: true,
+		{% endif %}
+		account_organisation: '{{ account.organisation.name }}',
+		user_email: '{{ current_user.email }}',
+		stripe_key: '{{ account.payment_gateway.stripe_key }}',
+		secure_url: "{{ '/' | secure_url }}",
 		templates_path: 'https://d1adef9hr2r55o.cloudfront.net/latest/launchly-cart.templates.html',
 		css_path: 'https://d1adef9hr2r55o.cloudfront.net/latest/cart.min.css'
 	});
