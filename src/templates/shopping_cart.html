@@ -1,4 +1,5 @@
 <script id="shopping_cart-template" type="text/x-handlebars-template">
+
 	<input type="hidden" id="cart_reference" name="cart_reference" value="{{reference}}">
 	<input type="hidden" id="session_id" name="session_id" value="{{session_id}}">
 
@@ -14,7 +15,23 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<img alt="" class="" src="http://cdn1.launchly.net/asset/file/5212011557817e9868000015/cards.png" />
+
+				{{#if accept_master_card }}
+					<img alt="MasterCard" title="We accept MasterCard" class="pull-left mrs" src="https://d1adef9hr2r55o.cloudfront.net/images/mastercard_small.png">
+				{{/if}}
+
+				{{#if accept_visa }}
+					<img alt="Visa" title="We accept Visa" class="pull-left mrs" src="https://d1adef9hr2r55o.cloudfront.net/images/visa_small.png">
+				{{/if}}
+
+				{{#if accept_american_express }}
+					<img alt="American Express" title="We accept American Express" class="pull-left mrs" src="https://d1adef9hr2r55o.cloudfront.net/images/american_express_small.png">
+				{{/if}}
+
+				{{#if accept_paypal }}
+					<img alt="PayPal" title="We accept PayPal" class="pull-left mrs" src="https://d1adef9hr2r55o.cloudfront.net/images/paypal_small.png">
+				{{/if}}
+
 			</div>
 		</div>
 	</div>
@@ -31,9 +48,9 @@
 								<p><i class="fa fa-shopping-cart"></i></p>
 								<p>There are no items in your cart.</p>
 							</div>
-						</div><!--/col-md-12-->
-					</div><!--/row-->
-				</div><!--/container-->
+						</div>
+					</div>
+				</div>
 			{{else}}
 
 				<div class="container">
@@ -176,7 +193,7 @@
 							{{#if can_pay_later }}
 								<a href="#" class="btn mtl" data-cart-function="on_account">Pay later</a>
 							{{/if}}
-						</div><!--/col-md-6-->
+						</div>
 
 						<div class="col-md-6 text-center">
 							{{#if can_pay}}
@@ -195,9 +212,9 @@
 									<img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" data-cart-function="paypal" class="mtl" style="cursor:pointer;">
 								{{/if}}
 							{{/if}}
-						</div><!--/col-md-6-->
+						</div>
 
-					</div><!--/row-->
+					</div>
 
 					<!--<div class="row">
 						<div class="col-md-12">
@@ -220,11 +237,11 @@
 							<a href="{{sign_in_link}}" class="btn btn-warning" data-link="{{sign_in_link}}" onclick="newWindow=window.open('{{sign_in_link}}', 'loginwindow', 'height=600,width=940,status=yes'); if (window.focus) { newWindow.focus(); } return false;">
 								Sign in or Register to continue
 							</a>
-						</div><!--/col-md-12.sign_in_register-->
+						</div>
 
 					{{/if}}
 
-				</div><!--/container-->
+				</div>
 
 			{{/if}}
 
