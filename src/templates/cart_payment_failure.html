@@ -9,10 +9,13 @@
 
 			<div class="modal-body" style="height:500px;">
 				<h1><span><i class="fa fa-times-circle"></i></span>Payment Declined!</h1>
-				<p class="alert alert-error hide">{{message}}</p>
+
+				<div id="payment-error-message" class="pbl mbm hidden">
+					<p class="alert alert-warning">{{message}}</p>
+				</div>
 
 				<p class="first">
-					Don&lsquo;t worry. It happens. You can <a href="#" onclick="payment_failure_message(); return false;">view the message</a> that<br>
+					Don&lsquo;t worry. It happens. You can <a href="#" onclick="jQuery('#payment-error-message').toggleClass('hidden'); return false;">view the message</a> that<br>
 					was returned from our payment gateway
 					{{#unless has_paypal }}
 						or<br> you can 							
@@ -24,7 +27,7 @@
 					{{#unless has_paypal }}
 						<a href="#" class="btn" data-cart-screen="payment">Try again</a>
 					{{/unless}}
-					<a href="#" class="btn" onclick="payment_failure_message(); return false;">View message</a>
+					<a href="#" class="btn" onclick="jQuery('#payment-error-message').toggleClass('hidden'); return false;">View message</a>
 				</p>
 
 			</div>
