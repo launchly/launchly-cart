@@ -15,8 +15,8 @@ $(document).ready(function() {
 	cart.secure_url = "{{ '/' | secure_url }}";
 
 	cart.init({
-		templates_path: 'http://local.dev/spitfire/cart/launchly-cart.templates.html',
-		css_path: 'http://local.dev/spitfire/cart/cart.min.css'
+		css_path: 		'http://local.dev/spitfire/cart/cart.min.css',
+		templates_path: 'http://local.dev/spitfire/cart/launchly-cart.templates.html'
 	});
 
 });
