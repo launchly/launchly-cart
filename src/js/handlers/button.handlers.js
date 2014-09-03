@@ -59,6 +59,7 @@ jQuery(document).on('change', '#card_number', function() { cart.select_payment_t
 jQuery(document).on('click', '.payment-icon', function() { cart.select_payment_type(jQuery(this).data('type')); });
 
 jQuery(document).on('click', '#pay-by-stripe', function(event) {
+
 	var btn = jQuery(this);
 	var btnText = btn.text();
 	btn.text('Loading').attr('disabled', 'disabled');
@@ -71,7 +72,6 @@ jQuery(document).on('click', '#pay-by-stripe', function(event) {
 			cart.stripe_pay(token, args);
 		},
 		opened: function() {
-			btn.text(btnText).removeAttr('disabled');
 		},
 		closed: function() {
 			btn.text(btnText).removeAttr('disabled');
@@ -84,7 +84,7 @@ jQuery(document).on('click', '#pay-by-stripe', function(event) {
 		amount: jQuery(this).data('amount'),
 		email: jQuery(this).data('email'),
 		currency: jQuery(this).data('currency')
-		});
+	});
 	
 	event.preventDefault();
 });
