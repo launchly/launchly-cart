@@ -317,7 +317,9 @@ label {
 	display: block;
 }
 
-#cart-payment-failure-placeholder {
+#cart-payment-failure-placeholder,
+#cart-payment-success-placeholder {
+	text-align: center;
 
 	h1 {
 
@@ -334,6 +336,13 @@ label {
 			margin-bottom: 30px;
 		}
 	}
+
+}
+
+
+
+#cart-payment-failure-placeholder {
+
 	
 	.modal-body {
 		max-height: 500px;
@@ -354,7 +363,7 @@ label {
 		&.last {
 			padding-top: 55px;
 			margin-top: 10px;
-			background-image: url('https://melbourne-systems.s3.amazonaws.com/asset/file/51e770ee57817e204b000260/arrgh.png');
+			background-image: url('https://d1adef9hr2r55o.cloudfront.net/images/arrgh.png');
 			background-repeat: no-repeat;
 			background-position: right top;
 		}
@@ -376,16 +385,11 @@ label {
 	}
 }
 
-#cart-payment-failure-placeholder,
-#cart-payment-success-placeholder {
-	text-align: center;
-}
-
 #cart-payment-success-placeholder {
 
 	.modal-body {
 
-		background-image: url('https://melbourne-systems.s3.amazonaws.com/asset/file/51e62c6857817e25ee00014e/thank-you.png');
+		background-image: url('https://d1adef9hr2r55o.cloudfront.net/images/thank-you.png');
 		background-position: 15px 430px;
 		background-repeat: no-repeat;
 		min-height: 480px;
@@ -396,21 +400,13 @@ label {
 		}
 	}
 	
+
 	h1 {
-
-		color: #495257;
-		font-weight: normal;
-		font-size: 31px;
-		text-shadow: none;
-		margin-top: 38px;
-
 		span {
 			color: #B6DA4B;
-			display: block;
-			font-size: 140px;
-			margin-bottom: 30px;
 		}
 	}
+
 	
 	h1, p {
 		color: #7f8b92;
@@ -437,21 +433,11 @@ label {
 		background-color: #ccc;
 		color: #fff;
 
-		&:nth-child(1) {
-			background-color: #1e4b7e;
-		}
-		
-		&:nth-child(2) {
-			background-color: #00bdef;
-		}
-		
-		&:nth-child(3) {
-			background-color: #c22312;
-		}
-		
-		&:nth-child(4) {
-			background-color: #0072b5;
-		}
+		&:nth-child(1) { background-color: #1e4b7e; }		
+		&:nth-child(2) { background-color: #00bdef; }
+		&:nth-child(3) { background-color: #c22312; }
+		&:nth-child(4) { background-color: #0072b5; }
+
 	}
 }
 
