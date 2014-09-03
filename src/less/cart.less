@@ -39,25 +39,32 @@
 	.container {
 		width: 100%;	
 	}
-}
 
-.cbp-spmenu-right {
+	&.sc-menu {
 
-	right: -100%;
-	
-	&.cbp-spmenu-open {
-		right: 0px;
+		right: -100%;
+		
+		&.sc-menu-open {
+			right: 0px;
+		}
 	}
 }
 
+
 @media (min-width: 768px) and (max-width: 1024px) {
-	#shopping-cart { width: 80%; }
-	.cbp-spmenu-right { right: -80%; }
+	#shopping-cart { 
+		width: 80%; 
+		&.sc-menu { right: -80%; }
+	}
+	
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
-	#shopping-cart { width: 80%; }
-	.cbp-spmenu-right { right: -80%; }
+	#shopping-cart { 
+		width: 80%; 
+		&.sc-menu { right: -80%; }
+	}
+	
 }
 
 #shopping-cart {
@@ -76,9 +83,11 @@
 		}
 		
 		div {
+
 			&:first-child {
 				margin-right: 20px;
 			}
+			
 			&:last-child {
 				font-size: 8pt;
 				text-transform: uppercase;

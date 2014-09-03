@@ -465,7 +465,7 @@ var cart = {
 	},
 	
 	toggle: function() {
-		jQuery('#shopping-cart').toggleClass('cbp-spmenu-open');
+		jQuery('#shopping-cart').toggleClass('sc-menu-open');
 	}
 };
 jQuery(cart).on('cart.changed', function(event, current_cart) { 
@@ -557,10 +557,7 @@ jQuery(cart).on('cart.ready', function() {
 });
 
 jQuery(cart).on('cart.set', function() {
-	var cart_panel = jQuery('#shopping-cart');
-	if (!cart_panel.hasClass('cbp-spmenu-open')) {
-		cart_panel.addClass('cbp-spmenu-open'); 
-	}
+	jQuery('#shopping-cart').toggleClass('sc-menu-open');
 });
 
 /*

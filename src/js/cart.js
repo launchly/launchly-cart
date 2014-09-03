@@ -469,6 +469,6 @@ var cart = {
 	},
 	
 	toggle: function() {
-		jQuery('#shopping-cart').toggleClass('cbp-spmenu-open');
+		jQuery('#shopping-cart').toggleClass('sc-menu-open');
 	}
 };

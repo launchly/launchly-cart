@@ -32,17 +32,17 @@
 #shopping-cart .container {
   width: 100%;
 }
-.cbp-spmenu-right {
+#shopping-cart.sc-menu {
   right: -100%;
 }
-.cbp-spmenu-right.cbp-spmenu-open {
+#shopping-cart.sc-menu.sc-menu-open {
   right: 0px;
 }
 @media (min-width: 768px) and (max-width: 1024px) {
   #shopping-cart {
     width: 80%;
   }
-  .cbp-spmenu-right {
+  #shopping-cart.sc-menu {
     right: -80%;
   }
 }
@@ -50,7 +50,7 @@
   #shopping-cart {
     width: 80%;
   }
-  .cbp-spmenu-right {
+  #shopping-cart.sc-menu {
     right: -80%;
   }
 }
