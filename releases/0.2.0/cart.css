@@ -60,19 +60,15 @@
 #shopping-cart header {
   background-color: #007fb7;
   color: #fff;
-  margin: -20px -20px 10px;
+  margin: 0 0 10px;
   padding: 5px 20px 10px 20px;
 }
 #shopping-cart header a {
   color: #fff;
 }
-#shopping-cart header div:first-child {
-  margin-right: 20px;
-}
-#shopping-cart header div:last-child {
+#shopping-cart header div {
   font-size: 8pt;
   text-transform: uppercase;
-  margin-top: 5px;
 }
 #store-items .content {
   height: 100%;
