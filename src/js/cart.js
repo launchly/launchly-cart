@@ -13,28 +13,43 @@
  * dec            
  * empty          
  * get 
- * update 
  * inc                    
- * remove                 
- * set                    
  * on_account
  * pay                    
  * paypal
  * paypal_confirm_purchase
  * paypal_cancel_purchase
  * payment_type_from_number
+ * remove                 
+ * set                    
+ * stripe_pay
+ * update 
+ * 
  *
  * List of cart events
  * ------------
  *
- * cart.changed           the contents of the shopping cart has changed
- * cart.recieved          a new cart has been downloaded
- * cart.payment.success   the order was successfully paid for
- * cart.payment.failure   the payment was rejected and the order was not submitted
- * cart.price             a price check has been retrieved
+ * cart.changed           	the contents of the shopping cart has changed
+ * cart.recieved          	a new cart has been downloaded
+ * cart.payment.success   	the order was successfully paid for
+ * cart.payment.failure   	the payment was rejected and the order was not submitted
+ * cart.price             	a price check has been retrieved
  * cart.on_account.success	the order was successfully submitted, but not paid for
  * cart.on_account.failure	the order was rejected and the order was not submitted
- *
+ * cart.dec 				a variant's quantity has been decremented
+ * cart.inc 				a variant's quantity has been incremented
+ * cart.set 				a variant's quantity has been set
+ * cart.empty 				the shopping cart has been emptied
+ * cart.get 				the shopping cart has been fetched
+ * cart.paypal.failure 		payment by paypal could not be made
+ * cart.ready 				launchly-cart has downloaded all supporting materials and is ready to begin processing
+ * payment.success 			payment was successful
+ * payment.failure 			payment failed for some reason
+ * paypal.confirm.success 	paypal express checkout was confirmed
+ * paypal.confirm.failure
+ * paypal.cancel.success 	request to cancel paypal payment was successful
+ * paypal.cancel.failure 	request to cancel paypal payment failed
+ * 
  */
 
 var cart = {
