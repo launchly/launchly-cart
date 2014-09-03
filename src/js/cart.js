@@ -427,7 +427,7 @@ var cart = {
 	loadComponents: function() {
 		var context = {};
 		var html = cart.cached_template('cart_components', context);
-		jQuery('body').append(html);
+		jQuery('body').prepend(html);
 	},
 	
 	loadCSS: function() {
@@ -435,11 +435,15 @@ var cart = {
 	},
 	
 	store: function(name, raw) {
-		cart.cached[name] = Handlebars.compile( raw );
+		cart.cached[name] = Handlebars.compile(raw);
 	},
 	
 	render: function(name, context, selector) {
-		if (typeof context === 'undefined') { context = {}; }
+
+		if (typeof context === 'undefined') { 
+			context = {};
+		}
+
 		var html = cart.cached[name](context);
 		jQuery(selector).html(html);
 	},
