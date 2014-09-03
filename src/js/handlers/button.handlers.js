@@ -41,7 +41,7 @@ jQuery(document).on('keyup', 'input[data-cart-quantity]', function(event) {
 	cart.price(jQuery(this));
 });
 
-jQuery('#store-side').on('changed', function() {
+jQuery('#shopping-cart').on('changed', function() {
 	jQuery('#store-inner').css('height', jQuery(window).height() - 140);		
 });
 

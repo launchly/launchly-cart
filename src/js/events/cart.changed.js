@@ -17,7 +17,8 @@ jQuery(cart).on('cart.changed', function(event, current_cart) {
 
 	jQuery('#cart-contact-details-container').html(cart.cached_template('cart_contact_details', current_cart) );
 	jQuery('#cart-payment-container').html(cart.cached_template('cart_payment', current_cart) );
-	jQuery('#store-side').html(cart.cached_template('shopping_cart', current_cart));
+
+	jQuery('#shopping-cart').html(cart.cached_template('shopping_cart', current_cart));
 	cart.populate_states(jQuery('#billing_country'), 'billing', current_cart.billing_state);
 	jQuery('.cart-checkout').html(cart.cached_template('cart_checkout', current_cart));
 

@@ -485,10 +485,13 @@ jQuery(cart).on('cart.changed', function(event, current_cart) {
 
 	jQuery('#cart-contact-details-container').html(cart.cached_template('cart_contact_details', current_cart) );
 	jQuery('#cart-payment-container').html(cart.cached_template('cart_payment', current_cart) );
-	jQuery('#store-side').html(cart.cached_template('shopping_cart', current_cart));
+
+	jQuery('#shopping-cart').html(cart.cached_template('shopping_cart', current_cart));
 	cart.populate_states(jQuery('#billing_country'), 'billing', current_cart.billing_state);
 	jQuery('.cart-checkout').html(cart.cached_template('cart_checkout', current_cart));
+
 });
+
 jQuery(cart).on('cart.empty', function() { 
 	if (typeof ga !== 'undefined') {
 		ga('ec:setAction', 'empty');
@@ -499,6 +502,7 @@ jQuery(cart).on('cart.empty', function() {
 jQuery(cart).on('cart.on_account.failure', function(event, data) {
 	jQuery(cart).trigger('cart.payment.failure', data);
 });
+
 jQuery(cart).on('cart.on_account.success', function(event, data) {
 	jQuery(cart).trigger('cart.payment.success', data);
 });
@@ -518,6 +522,7 @@ jQuery(cart).on('cart.payment.success', function(event, data) {
 	cart.get();
 	cart.track_order(data);
 });
+
 jQuery(cart).on('cart.paypal.cancel.success', function() { 
 	window.alert('You have not been charged.');
 	window.location = '/';
@@ -598,7 +603,7 @@ jQuery(document).on('keyup', 'input[data-cart-quantity]', function(event) {
 	cart.price(jQuery(this));
 });
 
-jQuery('#store-side').on('changed', function() {
+jQuery('#shopping-cart').on('changed', function() {
 	jQuery('#store-inner').css('height', jQuery(window).height() - 140);		
 });
 
