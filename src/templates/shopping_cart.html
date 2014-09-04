@@ -210,7 +210,7 @@
 									data-key="{{ stripe_key }}"
 									data-image="{{ stripe_icon }}"
 									data-email="{{ user_email }}"
-									data-currency="AUD">
+									data-currency="{{ currency }}">
 									<i class="fa fa-credit-card"></i> Pay with Credit Card
 								</button>
 							{{else}}
@@ -237,7 +237,7 @@
 							data-key="{{ stripe_key }}"
 							data-image="https://melbourne-systems.s3.amazonaws.com/asset/file/52e0b0cb57817e5b20000159/launchly-stripe-icon.png"
 							data-email="{{ user_email }}"
-							data-currency="AUD">
+							data-currency="{{ currency }}">
 							Purchase
 						</button>
 					</div>
