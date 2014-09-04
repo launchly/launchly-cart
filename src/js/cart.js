@@ -58,7 +58,6 @@ var cart = {
 	billingState: '',
 	can_pay_later: false,
 	cached: {},
-	account_organisation: '',
 	stripe_icon: '<%= pkg.cdn %>/images/launchly-stripe-icon.png',
 	secure_url: '',
 	templates_path: '<%= pkg.cdn %>/releases/<%= pkg.version %>/launchly-cart.templates.html',

@@ -190,55 +190,43 @@
 
 				{{#if signed_in}}
 
-				<div class="row">
+					<div class="row">
 
-					<div class="col-md-6">
-						<a href="#" class="btn show-detail-link" data-cart-screen="contact-details">{{#if has_addresses}}<i class="fa fa-pencil"></i> Change Details{{else}}Set Contact Details{{/if}}</a>
-						{{#if can_pay_later }}
-							<a href="#" class="btn mtl" data-cart-function="on_account">Pay later</a>
-						{{/if}}
-					</div>
+						<div class="col-md-6">
+							<a href="#" class="btn show-detail-link" data-cart-screen="contact-details">{{#if has_addresses}}<i class="fa fa-pencil"></i> Change Details{{else}}Set Contact Details{{/if}}</a>
+							{{#if can_pay_later }}
+								<a href="#" class="btn mtl" data-cart-function="on_account">Pay later</a>
+							{{/if}}
+						</div>
 
-					<div class="col-md-6 text-center">
-						{{#if can_pay}}
+						<div class="col-md-6 text-center">
+							{{#if can_pay}}
 
-							{{#if stripe_key }}
-								<button style="width:100%;" class="btn" id="pay-by-stripe" 
-									data-description="Order #{{ reference }} ({{ formatted_grand_total }})"
-									data-amount="{{ grand_total_in_cents }}"
-									data-key="{{ stripe_key }}"
-									data-image="{{ stripe_icon }}"
-									data-currency="{{ currency }}">
-									<i class="fa fa-credit-card"></i> Pay with Credit Card
-								</button>
-							{{else}}
-								{{#if accept_payment_card }}
-									<a href="#" class="btn checkout" data-cart-screen="payment"><i class="fa fa-credit-card"></i> Pay Now</a>
+								{{#if stripe_key }}
+									<button style="width:100%;" class="btn" id="pay-by-stripe" 
+										data-name="{{ organisation_name }}"
+										data-description="Order #{{ reference }} ({{ formatted_grand_total }})"
+										data-amount="{{ grand_total_in_cents }}"
+										data-key="{{ stripe_key }}"
+										data-image="{{ stripe_icon }}"
+										data-email="{{ user_email }}"
+										data-currency="{{ currency }}">
+										<i class="fa fa-credit-card"></i> Pay with Credit Card
+									</button>
+								{{else}}
+									{{#if accept_payment_card }}
+										<a href="#" class="btn checkout" data-cart-screen="payment"><i class="fa fa-credit-card"></i> Pay Now</a>
+									{{/if}}
 								{{/if}}
+
+								{{#if accept_paypal}}
+									<img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" data-cart-function="paypal" class="mtl" style="cursor:pointer;">
+								{{/if}}
+
 							{{/if}}
+						</div>
 
-							{{#if accept_paypal}}
-								<img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" data-cart-function="paypal" class="mtl" style="cursor:pointer;">
-							{{/if}}
-
-						{{/if}}
 					</div>
-
-				</div>
-
-				<!--<div class="row">
-					<div class="col-md-12">
-						<button class="btn" id="customButton" 
-							data-description="Order #{{ reference }} ({{ formatted_grand_total }})"
-							data-amount="{{ grand_total_in_cents }}"
-							data-key="{{ stripe_key }}"
-							data-image="https://melbourne-systems.s3.amazonaws.com/asset/file/52e0b0cb57817e5b20000159/launchly-stripe-icon.png"
-							data-email="{{ user_email }}"
-							data-currency="{{ currency }}">
-							Purchase
-						</button>
-					</div>
-				</div>-->
 
 				{{else}}
 
