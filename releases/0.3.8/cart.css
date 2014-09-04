@@ -228,20 +228,27 @@
   color: #fff;
 }
 #cart-payment .modal-header .lock {
-  font-size: 2.7em;
-  margin: -9px 10px 0 0;
+  margin: 0 10px 0 0;
 }
 #cart-payment .modal-header h1 {
   font-family: 'Open Sans', sans-serif;
-  margin: 0;
 }
 #cart-payment .modal-header p {
-  font-size: 0.65em;
+  font-size: 1em;
+}
+#cart-payment .modal-header h1,
+#cart-payment .modal-header p {
+  margin: 0;
 }
 #cart-payment .modal-header .pull-right {
-  font-size: 2em;
   font-weight: bold;
   color: #fff;
+}
+#cart-payment .modal-header h1,
+#cart-payment .modal-header .pull-right,
+#cart-payment .modal-header .lock {
+  font-size: 2em;
+  line-height: 1.3em;
 }
 label {
   display: block;
