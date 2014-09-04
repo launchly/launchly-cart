@@ -22,5 +22,6 @@
   "dependencies": {
     "jquery": "*"
   },
-  "keywords": []
+  "keywords": [],
+  "cdn": "https://d1adef9hr2r55o.cloudfront.net"
 }

@@ -56,10 +56,10 @@ var cart = {
 	cached: {},
 	account_organisation: '',
 	user_email: '',
-	stripe_icon: '/images/launchly-stripe-icon.png',
+	stripe_icon: 'https://d1adef9hr2r55o.cloudfront.net/images/launchly-stripe-icon.png',
 	secure_url: '',
-	templates_path: '/releases/0.3.14/launchly-cart.templates.html',
-	css_path: '/releases/0.3.14/cart.min.css',
+	templates_path: 'https://d1adef9hr2r55o.cloudfront.net/releases/0.3.14/launchly-cart.templates.html',
+	css_path: 'https://d1adef9hr2r55o.cloudfront.net/releases/0.3.14/cart.min.css',
 	templates: [
 		'cart_checkout',
 		'cart_contact_details',

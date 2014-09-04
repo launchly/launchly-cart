@@ -288,7 +288,7 @@ label {
 #cart-payment-failure-placeholder p.last {
   padding-top: 55px;
   margin-top: 10px;
-  background-image: url('/images/arrgh.png');
+  background-image: url('https://d1adef9hr2r55o.cloudfront.net/images/arrgh.png');
   background-repeat: no-repeat;
   background-position: right top;
 }
@@ -304,7 +304,7 @@ label {
   margin-right: 9px;
 }
 #cart-payment-success-placeholder .modal-body {
-  background-image: url('/images/thank-you.png');
+  background-image: url('https://d1adef9hr2r55o.cloudfront.net/images/thank-you.png');
   background-position: 15px 430px;
   background-repeat: no-repeat;
   min-height: 480px;
