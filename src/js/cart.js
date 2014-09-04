@@ -275,6 +275,21 @@ var cart = {
 		
 	},
 	
+	/* submit an order without paying for it */
+	on_account: function() {
+
+		var request = jQuery.ajax({
+			type: "POST",
+			url: cart.secure_url + '/__/pay/on_account.json',
+			data: {
+				'_launch_ly_session': jQuery('#session_id').val(),
+				'reference': jQuery('#cart_reference').val()
+			}
+		});
+
+		this.setup_callbacks(request, 'on_account');		
+	},
+	
 	/* get a price check on an item */
 	price: function(element) {
 
@@ -296,7 +311,7 @@ var cart = {
 	/* setup callbacks from ajax requests */
 	setup_callbacks: function(request, method) {
 
-		request.done(function(data) {			
+		request.done(function(data) {
 			jQuery(cart).trigger('cart.' + method + '.success', data);
 		});
 		

@@ -1,4 +1,4 @@
-/* launch.ly Shopping Cart - v0.3.7 - 2014-09-04
+/* launch.ly Shopping Cart - v0.3.8 - 2014-09-04
  * https://github.com/launchly/launchly-cart
  * Copyright (c) 2014 Craig Sullivan; Licensed MIT */
 
