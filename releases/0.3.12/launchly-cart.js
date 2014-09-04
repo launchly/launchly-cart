@@ -58,6 +58,7 @@ var cart = {
 	user_email: '',
 	uses_stripe: false,
 	stripe_key: '',
+	stripe_icon: 'https://d1adef9hr2r55o.cloudfront.net/images/launchly-stripe-icon.png',
 	secure_url: '',
 	templates_path: '',
 	css_path: '',
@@ -422,6 +423,7 @@ var cart = {
 		if ( typeof options.account_organisation !== 'undefined') { cart.account_organisation = options.account_organisation; }
 		if ( typeof options.user_email !== 'undefined') { cart.user_email = options.user_email; }
 		if ( typeof options.stripe_key !== 'undefined') { cart.stripe_key = options.stripe_key; cart.uses_stripe = true; }
+		if ( typeof options.stripe_icon !== 'undefined') { cart.stripe_icon = options.stripe_icon; }
 		if ( typeof options.secure_url !== 'undefined') { cart.secure_url = options.secure_url; }
 		if ( typeof options.templates_path !== 'undefined') { cart.templates_path = options.templates_path; }
 		if ( typeof options.css_path !== 'undefined') { cart.css_path = options.css_path; }
@@ -523,6 +525,7 @@ jQuery(cart).on('cart.changed', function(event, current_cart) {
 	current_cart.account_organisation = cart.account_organisation;
 	current_cart.user_email = cart.user_email;
 	current_cart.stripe_key = cart.stripe_key;
+	current_cart.stripe_icon = cart.stripe_icon;
 	current_cart.uses_stripe = cart.uses_stripe;
 
 	jQuery('#cart-contact-details-container').html(cart.cached_template('cart_contact_details', current_cart) );
