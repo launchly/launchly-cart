@@ -59,7 +59,6 @@ var cart = {
 	can_pay_later: false,
 	cached: {},
 	account_organisation: '',
-	user_email: '',
 	stripe_icon: '<%= pkg.cdn %>/images/launchly-stripe-icon.png',
 	secure_url: '',
 	templates_path: '<%= pkg.cdn %>/releases/<%= pkg.version %>/launchly-cart.templates.html',
@@ -423,7 +422,6 @@ var cart = {
 
 		if ( typeof options.can_pay_later !== 'undefined') { cart.can_pay_later = options.can_pay_later; }
 		if ( typeof options.account_organisation !== 'undefined') { cart.account_organisation = options.account_organisation; }
-		if ( typeof options.user_email !== 'undefined') { cart.user_email = options.user_email; }
 		if ( typeof options.stripe_icon !== 'undefined') { cart.stripe_icon = options.stripe_icon; }
 		if ( typeof options.secure_url !== 'undefined') { cart.secure_url = options.secure_url; }
 		if ( typeof options.templates_path !== 'undefined') { cart.templates_path = options.templates_path; }

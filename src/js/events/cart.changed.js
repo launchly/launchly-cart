@@ -12,7 +12,6 @@ jQuery(cart).on('cart.changed', function(event, current_cart) {
 	current_cart['can_pay_later'] = cart.can_pay_later;
 	
 	current_cart.account_organisation = cart.account_organisation;
-	current_cart.user_email = cart.user_email;
 	current_cart.stripe_icon = cart.stripe_icon;
 
 	jQuery('#cart-contact-details-container').html(cart.cached_template('cart_contact_details', current_cart) );
