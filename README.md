@@ -6,6 +6,9 @@ JQuery shopping cart plugin to [launch.ly](http://launch.ly)
 ## Requirements
 
 - [launch.ly](http://launch.ly) account
+- [jQuery](http://jquery.com)
+- [Bootstrap](http://getbootstrap.com)
+- [Font Awesome](http://fortawesome.github.io/Font-Awesome/)
 - [Handlebars](https://github.com/wycats/handlebars.js)
 - [Stripe](http://stripe.com) (if using stripe payment gateway)
 
