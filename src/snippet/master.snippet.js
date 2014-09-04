@@ -13,7 +13,6 @@ $(document).ready(function() {
 
 		account_organisation: 	'{{ account.organisation.name }}',
 		user_email: 			'{{ current_user.email }}',
-		stripe_key: 			'{{ account.payment_gateway.stripe_key }}',
 		secure_url: 			'{{ '/' | secure_url }}',
 		css_path: 				'https://d1adef9hr2r55o.cloudfront.net/latest/cart.min.css',
 		templates_path: 		'https://d1adef9hr2r55o.cloudfront.net/latest/launchly-cart.templates.html'
