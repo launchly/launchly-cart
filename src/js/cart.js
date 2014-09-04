@@ -60,10 +60,10 @@ var cart = {
 	cached: {},
 	account_organisation: '',
 	user_email: '',
-	stripe_icon: 'https://d1adef9hr2r55o.cloudfront.net/images/launchly-stripe-icon.png',
+	stripe_icon: '<%= pkg.cdn %>/images/launchly-stripe-icon.png',
 	secure_url: '',
-	templates_path: '',
-	css_path: '',
+	templates_path: '<%= pkg.cdn %>/releases/<%= pkg.version %>/launchly-cart.templates.html',
+	css_path: '<%= pkg.cdn %>/releases/<%= pkg.version %>/cart.min.css',
 	templates: [
 		'cart_checkout',
 		'cart_contact_details',

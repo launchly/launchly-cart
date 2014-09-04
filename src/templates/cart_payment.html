@@ -72,9 +72,19 @@
 							</div>
 
 							<div class='pull-left' style='margin-top:1.6em;'>
-								<img alt="Visa" data-type="visa" class="payment-icon" style="cursor:hand;" src="https://d19sd42nsxuauk.cloudfront.net/spitfire/icons/payment/visa.png">
-								<img alt="Master" data-type="master" class="payment-icon" style="cursor:hand;" src="https://d19sd42nsxuauk.cloudfront.net/spitfire/icons/payment/master.png">
-								<img alt="American Express" data-type="american_express" style="cursor:hand;" class="payment-icon" src="https://d19sd42nsxuauk.cloudfront.net/spitfire/icons/payment/american_express.png">
+
+								{{#if accept_mastercard }}
+									<img alt="MasterCard" title="We accept MasterCard" data-type="master" class="payment-icon" style="cursor:hand;" src="<%= pkg.cdn %>/images/mastercard.png">
+								{{/if}}
+
+								{{#if accept_visa }}
+									<img alt="Visa" title="We accept Visa" data-type="visa" class="payment-icon" style="cursor:hand;" src="<%= pkg.cdn %>/images/visa.png">
+								{{/if}}
+
+								{{#if accept_american_express }}
+									<img alt="American Express" title="We accept American Express" data-type="american_express" class="payment-icon" style="cursor:hand;" src="<%= pkg.cdn %>/images/american_express.png">
+								{{/if}}
+
 							</div>
 
 							<div class="clear" style="margin-bottom:20px;"></div>

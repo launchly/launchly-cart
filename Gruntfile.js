@@ -19,12 +19,17 @@ module.exports = function(grunt) {
 			latest: {
 				options: {
 					banner: '<%= banner %>',
-					stripBanners: true
+					stripBanners: true,
+					process: true
 				},
 				src: ['src/js/cart.js', 'src/js/events/*.js', 'src/js/handlers/*.js', 'src/js/initialise.js'],
 				dest: 'latest/<%= pkg.name %>.js'
 			},
 			templates: {
+				options: {
+					stripBanners: true,
+					process: true
+				},
 				src: ['src/templates/*.html'],
 				dest: 'latest/<%= pkg.name %>.templates.html'
 			}
@@ -77,12 +82,20 @@ module.exports = function(grunt) {
 		},
 		less: {
 			development: {
+				options: {
+					modifyVars: {
+						imgPath: '"<%= pkg.cdn %>/images"'
+					}
+				},
 				files: {
 					'latest/cart.css': 'src/less/cart.less'
 				}
 			},
 			production: {
 				options: {
+					modifyVars: {
+						imgPath: '"<%= pkg.cdn %>/images"'
+					},
 					cleancss: true
 				},
 				files: {
