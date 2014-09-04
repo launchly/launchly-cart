@@ -296,7 +296,7 @@ var cart = {
 	/* setup callbacks from ajax requests */
 	setup_callbacks: function(request, method) {
 
-		request.done(function(data) {			
+		request.done(function(data) {
 			jQuery(cart).trigger('cart.' + method + '.success', data);
 		});
 		
