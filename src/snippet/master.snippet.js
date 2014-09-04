@@ -11,7 +11,6 @@ $(document).ready(function() {
 			canPayLater: 		true,
 		{% endif %}
 
-		account_organisation: 	'{{ account.organisation.name }}',
 		secure_url: 			'{{ '/' | secure_url }}',
 		css_path: 				'https://d1adef9hr2r55o.cloudfront.net/latest/cart.min.css',
 		templates_path: 		'https://d1adef9hr2r55o.cloudfront.net/latest/launchly-cart.templates.html'

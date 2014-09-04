@@ -204,7 +204,6 @@
 
 							{{#if stripe_key }}
 								<button style="width:100%;" class="btn" id="pay-by-stripe" 
-									data-name="{{ account_organisation }}"
 									data-description="Order #{{ reference }} ({{ formatted_grand_total }})"
 									data-amount="{{ grand_total_in_cents }}"
 									data-key="{{ stripe_key }}"
@@ -230,7 +229,6 @@
 				<!--<div class="row">
 					<div class="col-md-12">
 						<button class="btn" id="customButton" 
-							data-name="{{ account_organisation }}"
 							data-description="Order #{{ reference }} ({{ formatted_grand_total }})"
 							data-amount="{{ grand_total_in_cents }}"
 							data-key="{{ stripe_key }}"

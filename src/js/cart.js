@@ -421,7 +421,6 @@ var cart = {
 	init: function(options) {
 
 		if ( typeof options.can_pay_later !== 'undefined') { cart.can_pay_later = options.can_pay_later; }
-		if ( typeof options.account_organisation !== 'undefined') { cart.account_organisation = options.account_organisation; }
 		if ( typeof options.stripe_icon !== 'undefined') { cart.stripe_icon = options.stripe_icon; }
 		if ( typeof options.secure_url !== 'undefined') { cart.secure_url = options.secure_url; }
 		if ( typeof options.templates_path !== 'undefined') { cart.templates_path = options.templates_path; }
