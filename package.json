@@ -1,6 +1,5 @@
 {
   "name": "jquery-plugin",
-  "version": "0.3.14",
   "engines": {
     "node": ">= 0.8.0"
   },
@@ -16,5 +15,6 @@
     "grunt-contrib-clean": "~0.4.0",
     "grunt": "~0.4.1",
     "grunt-contrib-less": "~0.11.4"
-  }
+  },
+  "version": "0.4.0"
 }

@@ -59,16 +59,12 @@
 }
 #shopping-cart header {
   background-color: #007fb7;
-  color: #fff;
+  color: #ffffff;
   margin: 0 0 10px;
   padding: 5px 20px 10px 20px;
 }
 #shopping-cart header a {
-  color: #fff;
-}
-#shopping-cart header div {
-  font-size: 8pt;
-  text-transform: uppercase;
+  color: #ffffff;
 }
 #store-items .content {
   height: 100%;
@@ -232,32 +228,45 @@
   color: #fff;
 }
 #cart-payment .modal-header .lock {
-  font-size: 2.7em;
-  margin: -9px 10px 0 0;
+  margin: 0 10px 0 0;
 }
 #cart-payment .modal-header h1 {
   font-family: 'Open Sans', sans-serif;
-  margin: 0;
 }
 #cart-payment .modal-header p {
-  font-size: 0.65em;
+  font-size: 1em;
+}
+#cart-payment .modal-header h1,
+#cart-payment .modal-header p {
+  margin: 0;
 }
 #cart-payment .modal-header .pull-right {
-  font-size: 2em;
   font-weight: bold;
   color: #fff;
+}
+#cart-payment .modal-header h1,
+#cart-payment .modal-header .pull-right,
+#cart-payment .modal-header .lock {
+  font-size: 2em;
+  line-height: 1.3em;
 }
 label {
   display: block;
 }
-#cart-payment-failure-placeholder h1 {
+#cart-payment-failure-placeholder,
+#cart-payment-success-placeholder {
+  text-align: center;
+}
+#cart-payment-failure-placeholder h1,
+#cart-payment-success-placeholder h1 {
   color: #495257;
   font-size: 31px;
   font-weight: normal;
   margin-top: 38px;
   text-shadow: none;
 }
-#cart-payment-failure-placeholder h1 span {
+#cart-payment-failure-placeholder h1 span,
+#cart-payment-success-placeholder h1 span {
   color: #d32a71;
   display: block;
   font-size: 140px;
@@ -279,7 +288,7 @@ label {
 #cart-payment-failure-placeholder p.last {
   padding-top: 55px;
   margin-top: 10px;
-  background-image: url('https://melbourne-systems.s3.amazonaws.com/asset/file/51e770ee57817e204b000260/arrgh.png');
+  background-image: url('https://d1adef9hr2r55o.cloudfront.net/images/arrgh.png');
   background-repeat: no-repeat;
   background-position: right top;
 }
@@ -294,12 +303,8 @@ label {
   background-color: #369fd0;
   margin-right: 9px;
 }
-#cart-payment-failure-placeholder,
-#cart-payment-success-placeholder {
-  text-align: center;
-}
 #cart-payment-success-placeholder .modal-body {
-  background-image: url('https://melbourne-systems.s3.amazonaws.com/asset/file/51e62c6857817e25ee00014e/thank-you.png');
+  background-image: url('https://d1adef9hr2r55o.cloudfront.net/images/thank-you.png');
   background-position: 15px 430px;
   background-repeat: no-repeat;
   min-height: 480px;
@@ -308,18 +313,8 @@ label {
   background-color: #369fd0;
   color: #fff;
 }
-#cart-payment-success-placeholder h1 {
-  color: #495257;
-  font-weight: normal;
-  font-size: 31px;
-  text-shadow: none;
-  margin-top: 38px;
-}
 #cart-payment-success-placeholder h1 span {
   color: #B6DA4B;
-  display: block;
-  font-size: 140px;
-  margin-bottom: 30px;
 }
 #cart-payment-success-placeholder h1,
 #cart-payment-success-placeholder p {

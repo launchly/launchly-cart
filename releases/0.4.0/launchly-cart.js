@@ -1,4 +1,4 @@
-/* launch.ly Shopping Cart - v0.3.1 - 2014-09-03
+/* launch.ly Shopping Cart - v0.4.0 - 2014-09-04
  * https://github.com/launchly/launchly-cart
  * Copyright (c) 2014 Craig Sullivan; Licensed MIT */
 
@@ -9,28 +9,43 @@
  * dec            
  * empty          
  * get 
- * update 
  * inc                    
- * remove                 
- * set                    
  * on_account
  * pay                    
  * paypal
  * paypal_confirm_purchase
  * paypal_cancel_purchase
  * payment_type_from_number
+ * remove                 
+ * set                    
+ * stripe_pay
+ * update 
+ * 
  *
  * List of cart events
  * ------------
  *
- * cart.changed           the contents of the shopping cart has changed
- * cart.recieved          a new cart has been downloaded
- * cart.payment.success   the order was successfully paid for
- * cart.payment.failure   the payment was rejected and the order was not submitted
- * cart.price             a price check has been retrieved
+ * cart.changed				the contents of the shopping cart has changed
+ * cart.recieved			a new cart has been downloaded
+ * cart.payment.success		the order was successfully paid for
+ * cart.payment.failure		the payment was rejected and the order was not submitted
+ * cart.price				a price check has been retrieved
  * cart.on_account.success	the order was successfully submitted, but not paid for
  * cart.on_account.failure	the order was rejected and the order was not submitted
- *
+ * cart.dec					a variant's quantity has been decremented
+ * cart.inc					a variant's quantity has been incremented
+ * cart.set					a variant's quantity has been set
+ * cart.empty				the shopping cart has been emptied
+ * cart.get					the shopping cart has been fetched
+ * cart.paypal.failure		payment by paypal could not be made
+ * cart.ready				launchly-cart has downloaded all supporting materials and is ready to begin processing
+ * payment.success			payment was successful
+ * payment.failure			payment failed for some reason
+ * paypal.confirm.success	paypal express checkout was confirmed
+ * paypal.confirm.failure
+ * paypal.cancel.success	request to cancel paypal payment was successful
+ * paypal.cancel.failure	request to cancel paypal payment failed
+ * 
  */
 
 var cart = {
@@ -41,10 +56,10 @@ var cart = {
 	cached: {},
 	account_organisation: '',
 	user_email: '',
-	stripe_key: '',
+	stripe_icon: 'https://d1adef9hr2r55o.cloudfront.net/images/launchly-stripe-icon.png',
 	secure_url: '',
-	templates_path: '',
-	css_path: '',
+	templates_path: 'https://d1adef9hr2r55o.cloudfront.net/releases/0.4.0/launchly-cart.templates.html',
+	css_path: 'https://d1adef9hr2r55o.cloudfront.net/releases/0.4.0/cart.min.css',
 	templates: [
 		'cart_checkout',
 		'cart_contact_details',
@@ -174,7 +189,7 @@ var cart = {
 		this.setup_callbacks(request, 'payment');
 
 	},
-	
+
 	stripe_pay: function(token) {
 
 
@@ -255,6 +270,21 @@ var cart = {
 		
 	},
 	
+	/* submit an order without paying for it */
+	on_account: function() {
+
+		var request = jQuery.ajax({
+			type: "POST",
+			url: cart.secure_url + '/__/pay/on_account.json',
+			data: {
+				'_launch_ly_session': jQuery('#session_id').val(),
+				'reference': jQuery('#cart_reference').val()
+			}
+		});
+
+		this.setup_callbacks(request, 'on_account');		
+	},
+	
 	/* get a price check on an item */
 	price: function(element) {
 
@@ -276,7 +306,7 @@ var cart = {
 	/* setup callbacks from ajax requests */
 	setup_callbacks: function(request, method) {
 
-		request.done(function(data) {			
+		request.done(function(data) {
 			jQuery(cart).trigger('cart.' + method + '.success', data);
 		});
 		
@@ -386,10 +416,11 @@ var cart = {
 	},
 	
 	init: function(options) {
+
 		if ( typeof options.can_pay_later !== 'undefined') { cart.can_pay_later = options.can_pay_later; }
 		if ( typeof options.account_organisation !== 'undefined') { cart.account_organisation = options.account_organisation; }
 		if ( typeof options.user_email !== 'undefined') { cart.user_email = options.user_email; }
-		if ( typeof options.stripe_key !== 'undefined') { cart.stripe_key = options.stripe_key; }
+		if ( typeof options.stripe_icon !== 'undefined') { cart.stripe_icon = options.stripe_icon; }
 		if ( typeof options.secure_url !== 'undefined') { cart.secure_url = options.secure_url; }
 		if ( typeof options.templates_path !== 'undefined') { cart.templates_path = options.templates_path; }
 		if ( typeof options.css_path !== 'undefined') { cart.css_path = options.css_path; }
@@ -490,7 +521,7 @@ jQuery(cart).on('cart.changed', function(event, current_cart) {
 	
 	current_cart.account_organisation = cart.account_organisation;
 	current_cart.user_email = cart.user_email;
-	current_cart.stripe_key = cart.stripe_key;
+	current_cart.stripe_icon = cart.stripe_icon;
 
 	jQuery('#cart-contact-details-container').html(cart.cached_template('cart_contact_details', current_cart) );
 	jQuery('#cart-payment-container').html(cart.cached_template('cart_payment', current_cart) );
@@ -526,7 +557,7 @@ jQuery(cart).on('cart.payment.failure', function(event, data) {
 jQuery(cart).on('cart.payment.success', function(event, data) {
 	jQuery('#cart-payment').modal('hide');	
 	jQuery('#cart-payment-processing-placeholder').modal('hide');
-	jQuery('#cart-payment-success-container').html(cart.cached_template('cart_payment_failure', data));
+	jQuery('#cart-payment-success-container').html(cart.cached_template('cart_payment_success', data));
 	jQuery('#cart-payment-success-placeholder').modal({ backdrop: false });
 	cart.get();
 	cart.track_order(data);
@@ -626,7 +657,8 @@ jQuery(document).on('change', '#card_number', function() { cart.select_payment_t
 /* manually selecting a payment type */
 jQuery(document).on('click', '.payment-icon', function() { cart.select_payment_type(jQuery(this).data('type')); });
 
-jQuery(document).on('click', '#customButton', function(event) {
+jQuery(document).on('click', '#pay-by-stripe', function(event) {
+
 	var btn = jQuery(this);
 	var btnText = btn.text();
 	btn.text('Loading').attr('disabled', 'disabled');
@@ -639,7 +671,6 @@ jQuery(document).on('click', '#customButton', function(event) {
 			cart.stripe_pay(token, args);
 		},
 		opened: function() {
-			btn.text(btnText).removeAttr('disabled');
 		},
 		closed: function() {
 			btn.text(btnText).removeAttr('disabled');
@@ -652,7 +683,7 @@ jQuery(document).on('click', '#customButton', function(event) {
 		amount: jQuery(this).data('amount'),
 		email: jQuery(this).data('email'),
 		currency: jQuery(this).data('currency')
-		});
+	});
 	
 	event.preventDefault();
 });
