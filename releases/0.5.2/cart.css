@@ -52,10 +52,10 @@
 }
 @media (min-width: 320px) and (max-width: 480px) {
   #shopping-cart {
-    width: 80%;
+    width: 90%;
   }
   #shopping-cart.sc-menu {
-    right: -80%;
+    right: -90%;
   }
 }
 #shopping-cart {

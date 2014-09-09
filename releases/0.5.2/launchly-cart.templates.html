@@ -395,11 +395,25 @@
 <header>
 	<div class="clearfix">
 		<div class="pull-left">
-			<a href="#" class="show-hide-cart" data-cart-function="toggle"><i class="fa fa-bars mrm"></i> Shopping Cart</a>
+			<a href="#" class="show-hide-cart" data-cart-function="toggle">
+				<span class="hidden-xs">
+					<i class="fa fa-bars mrm"></i> Shopping Cart
+				</span>
+				<span class="visible-xs">
+					<i class="fa fa-bars mrm"></i> Cart
+				</span>
+			</a>
 		</div>
 		<div class="pull-right">
-			<i class="fa fa-lock mrs"></i> 256bit Secure SSL 
-			<a data-cart-function="empty" href="#" class="mll"><i title="empty cart" rel="tooltip" class="fa fa-trash-o"></i></a>
+			<span class="hidden-xs">
+				<i class="fa fa-lock mrs"></i> 256bit Secure SSL
+				<a data-cart-function="empty" href="#" class="mll"><i title="empty cart" rel="tooltip" class="fa fa-trash-o"></i></a>
+			</span>
+			<span class="visible-xs">
+				<i class="fa fa-lock mrs"></i> SSL
+				<a data-cart-function="empty" href="#" class="mll"><i title="empty cart" rel="tooltip" class="fa fa-trash-o"></i></a>
+			</span>
+			
 		</div>
 	</div>
 </header>
