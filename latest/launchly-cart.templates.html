@@ -494,16 +494,25 @@
 
 				{{/items}}
 
-				{{#if discounts_available }}
 				<div class="row">
-					<div class="col-md-12">
-						<input id="coupon_code" name="coupon_code" placeholder="Coupon code" size="20" type="text" value="{{coupon_code}}" class="pull-right" style="margin-bottom:20px;">
+					<div class="col-md-6">
+						{{#if discounts_available }}
+						<div class="row">
+							<div class="col-md-12">
+								<input id="coupon_code" name="coupon_code" placeholder="Coupon code" size="20" type="text" value="{{coupon_code}}" class="pull-right">
+							</div>
+						</div>
+						{{/if}}
+						{{#if enable_instructions_to_seller }}
+						<div class="row">
+							<div class="col-md-12" style="margin-bottom:20px;">
+								<a href="#" id="instructions-to-seller" class="hidden"><i class="fa fa-comment-o"></i> Leave a note for seller</a>
+								<textarea id="instructions_to_seller" name="instructions_to_seller" placeholder="Instructions to seller" rows="2" class="hidden">{{instructions_to_seller}}</textarea>
+							</div>
+						</div>
+						{{/if}}
 					</div>
-				</div>
-				{{/if}}
-
-				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<a href="#" class="btn update pull-right" data-cart-function="update">Update</a>
 						<div class="pull-right sub-total">
 							<div class="intro">Sub-total</div>

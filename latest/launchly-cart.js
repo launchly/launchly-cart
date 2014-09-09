@@ -1,4 +1,4 @@
-/* launch.ly Shopping Cart - v0.5.2 - 2014-09-05
+/* launch.ly Shopping Cart - v0.5.2 - 2014-09-09
  * https://github.com/launchly/launchly-cart
  * Copyright (c) 2014 Craig Sullivan; Licensed MIT */
 
@@ -53,6 +53,7 @@ var cart = {
 	billingCountry: '',
 	billingState: '',
 	can_pay_later: false,
+	enable_instructions_to_seller: false,
 	cached: {},
 	stripe_icon: 'https://d1adef9hr2r55o.cloudfront.net/images/launchly-stripe-icon.png',
 	secure_url: '',
@@ -420,6 +421,7 @@ var cart = {
 		if ( typeof options.secure_url !== 'undefined') { cart.secure_url = options.secure_url; }
 		if ( typeof options.templates_path !== 'undefined') { cart.templates_path = options.templates_path; }
 		if ( typeof options.css_path !== 'undefined') { cart.css_path = options.css_path; }
+		if ( typeof options.enable_instructions_to_seller !== 'undefined')  { cart.enable_instructions_to_seller = options.enable_instructions_to_seller; }
 		
 		cart.loadCSS();
 		cart.loadTemplates();
@@ -514,6 +516,7 @@ jQuery(cart).on('cart.changed', function(event, current_cart) {
 	}
 	
 	current_cart['can_pay_later'] = cart.can_pay_later;
+	current_cart['enable_instructions_to_seller'] = cart.enable_instructions_to_seller;
 	
 	current_cart.stripe_icon = cart.stripe_icon;
 
@@ -523,7 +526,20 @@ jQuery(cart).on('cart.changed', function(event, current_cart) {
 	jQuery('#shopping-cart').html(cart.cached_template('shopping_cart', current_cart));
 	cart.populate_states(jQuery('#billing_country'), 'billing', current_cart.billing_state);
 	jQuery('.cart-checkout').html(cart.cached_template('cart_checkout', current_cart));
-
+	
+	if (jQuery('#instructions_to_seller').length > 0) {
+		if (jQuery('#instructions_to_seller').val().length > 0) {
+			jQuery('#instructions_to_seller').removeClass('hidden');
+		} else {
+			jQuery('#instructions-to-seller').removeClass('hidden');
+		}
+	}
+	
+	jQuery('#instructions-to-seller').unbind('click').bind('click', function(event) {
+		event.preventDefault();
+		jQuery(this).addClass('hidden');
+		jQuery('#instructions_to_seller').removeClass('hidden');
+	});
 });
 
 jQuery(cart).on('cart.empty', function() { 

@@ -57,6 +57,7 @@ var cart = {
 	billingCountry: '',
 	billingState: '',
 	can_pay_later: false,
+	enable_instructions_to_seller: false,
 	cached: {},
 	stripe_icon: '<%= pkg.cdn %>/images/launchly-stripe-icon.png',
 	secure_url: '',
@@ -424,6 +425,7 @@ var cart = {
 		if ( typeof options.secure_url !== 'undefined') { cart.secure_url = options.secure_url; }
 		if ( typeof options.templates_path !== 'undefined') { cart.templates_path = options.templates_path; }
 		if ( typeof options.css_path !== 'undefined') { cart.css_path = options.css_path; }
+		if ( typeof options.enable_instructions_to_seller !== 'undefined')  { cart.enable_instructions_to_seller = options.enable_instructions_to_seller; }
 		
 		cart.loadCSS();
 		cart.loadTemplates();
