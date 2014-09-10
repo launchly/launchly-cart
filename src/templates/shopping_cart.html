@@ -84,11 +84,11 @@
 				
 					<div class="row">
 						
-						<div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
 							<a href="{{url}}"><img src="{{column_2}}" class="img-responsive"></a>
 						</div>
 						
-						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-5">
 
 							{{#if sold_out}}
 								<a href="{{url}}"><del>{{title}}</del></a>
@@ -112,11 +112,7 @@
 
 						</div>
 
-						<div class="visible-xs col-xs-3">
-							<a href="{{url}}"><img src="{{column_2}}" class="img-responsive"></a>
-						</div>
-						
-						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-9">
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
 
 							<div class="text-right">
 								{{formatted_price}}<br>
@@ -134,7 +130,7 @@
 
 						</div>
 						
-						<div class="qty col-lg-2 col-md-2 col-sm-2 col-xs-3">
+						<div class="qty col-lg-2 col-md-2 col-sm-2 col-xs-2">
 							<input class="form-control" data-cart="qty" data-item="{{variant_id}}" placeholder="0" size="20" type="text" value="{{quantity}}">
 						</div>
 						
@@ -241,7 +237,7 @@
 						<div class="col-md-6">
 							<a href="#" class="btn show-detail-link" data-cart-screen="contact-details">{{#if has_addresses}}<i class="fa fa-pencil"></i> Change Details{{else}}Set Contact Details{{/if}}</a>
 							{{#if can_pay_later }}
-								<a href="#" class="btn mtl" data-cart-function="on_account">Pay later</a>
+								<a href="#" class="btn mtl mbs" data-cart-function="on_account">Pay later</a>
 							{{/if}}
 						</div>
 
@@ -257,7 +253,7 @@
 										data-image="{{ stripe_icon }}"
 										data-email="{{ user_email }}"
 										data-currency="{{ currency }}">
-										<i class="fa fa-credit-card"></i> Pay with Credit Card
+										<i class="fa fa-credit-card"></i> Pay Now
 									</button>
 								{{else}}
 									{{#if accept_payment_card }}
