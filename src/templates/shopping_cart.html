@@ -81,63 +81,59 @@
 			<div class="container">
 
 				{{#items}}
+				
+					<div class="row">
+						
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
+							<a href="{{url}}"><img src="{{column_2}}" class="img-responsive"></a>
+						</div>
+						
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
 
-					<div class="row clearfix item">
-
-						<div class="col-md-12">
-
-							<div class="icon col-lg-2 col-md-2 col-sm-3 col-xs-3">
-								<a href="{{url}}"><img src="{{column_2}}" class="img-responsive"></a>
-							</div>
-
-							<div class="title col-lg-6 col-md-2 col-sm-3 col-xs-3">
-
-								{{#if sold_out}}
-									<a href="{{url}}"><del>{{title}}</del></a>
-									<p style="margin:0;">
-										<del>
-											{{name_a}}: {{name_b}}
-											{{#if sku}} ({{sku}}) {{/if}}
-										</del>
-									</p>
-								{{else}}
-									<a href="{{url}}">{{title}}</a>
-									<p style="margin:0;">
+							{{#if sold_out}}
+								<a href="{{url}}"><del>{{title}}</del></a>
+								<p style="margin:0;">
+									<del>
 										{{name_a}}: {{name_b}}
 										{{#if sku}} ({{sku}}) {{/if}}
-									</p>
-								{{/if}}
+									</del>
+								</p>
+							{{else}}
+								<a href="{{url}}">{{title}}</a>
+								<p style="margin:0;">
+									{{name_a}}: {{name_b}}
+									{{#if sku}} ({{sku}}) {{/if}}
+								</p>
+							{{/if}}
 
-								{{#if notes}}
-									<p>Notes: {{notes}}</p>
-								{{/if}}
-
-							</div>
-
-							<div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
-
-								<div class="price">
-									{{formatted_price}}<br>
-									<span>
-									<a href="#" data-cart-function="remove" data-variant="{{variant_id}}"><i class="fa fa-times-circle"></i></a>
-									Qty: {{quantity}}
-									</span>
-								</div>
-
-								{{#if sold_out}}
-									<div style="text-align:right;">
-										<span class="label label-danger" style="font-size:8pt;">SOLD OUT</span>
-									</div>
-								{{/if}}
-
-							</div>
-
-							<div class="qty col-lg-2 col-md-2 col-sm-3 col-xs-3">
-								<input class="string" data-cart="qty" data-item="{{variant_id}}" placeholder="0" size="20" type="text" value="{{quantity}}">
-							</div>
+							{{#if notes}}
+								<p>Notes: {{notes}}</p>
+							{{/if}}
 
 						</div>
+						
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
 
+							<div class="text-right">
+								{{formatted_price}}<br>
+								<span>
+								<a href="#" data-cart-function="remove" data-variant="{{variant_id}}"><i class="fa fa-times-circle"></i></a>
+								Qty: {{quantity}}
+								</span>
+							</div>
+
+							{{#if sold_out}}
+								<div class="text-right">
+									<span class="label label-danger" style="font-size:8pt;">SOLD OUT</span>
+								</div>
+							{{/if}}
+
+						</div>
+						
+						<div class="qty col-lg-2 col-md-2 col-sm-2 col-xs-3">
+							<input class="form-control" data-cart="qty" data-item="{{variant_id}}" placeholder="0" size="20" type="text" value="{{quantity}}">
+						</div>
+						
 					</div>
 
 				{{/items}}
