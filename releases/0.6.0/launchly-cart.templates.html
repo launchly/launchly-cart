@@ -393,7 +393,7 @@
 <input type="hidden" id="session_id" name="session_id" value="{{session_id}}">
 
 <header>
-	<div class="clearfix">
+	<div class="clearfix" class="show-hide-cart" data-cart-function="toggle">
 
 		<div class="hidden-xs">
 			<div class="pull-left">
@@ -473,11 +473,11 @@
 				
 					<div class="row">
 						
-						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 mbl">
-							<a href="{{url}}"><img src="{{column_12}}" class="img-responsive"></a>
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+							<a href="{{url}}"><img src="{{column_2}}" class="img-responsive"></a>
 						</div>
 						
-						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-8">
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-5">
 
 							{{#if sold_out}}
 								<a href="{{url}}"><del>{{title}}</del></a>
@@ -501,39 +501,34 @@
 
 						</div>
 
-						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
 
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 prn text-right">
-								{{formatted_price}}
-								<br>
+							<div class="text-right">
+								{{formatted_price}}<br>
 								<span>
-									<a href="#" data-cart-function="remove" data-variant="{{variant_id}}"><i class="fa fa-times-circle"></i></a>
-									Qty: {{quantity}}
+								<a href="#" data-cart-function="remove" data-variant="{{variant_id}}"><i class="fa fa-times-circle"></i></a>
+								Qty: {{quantity}}
 								</span>
+							</div>
 
-								{{#if sold_out}}
-									<br>
+							{{#if sold_out}}
+								<div class="text-right">
 									<span class="label label-danger" style="font-size:8pt;">SOLD OUT</span>
-								{{/if}}
-							</div>
-
-							<div class="col-xs-9 visible-xs">&nbsp;</div>
-							
-							<div class="qty col-lg-6 col-md-6 col-sm-6 col-xs-12 prn">
-								<input class="form-control" data-cart="qty" data-item="{{variant_id}}" placeholder="0" size="20" type="text" value="{{quantity}}">
-							</div>
+								</div>
+							{{/if}}
 
 						</div>
-
-
+						
+						<div class="qty col-lg-2 col-md-2 col-sm-2 col-xs-2">
+							<input class="form-control" data-cart="qty" data-item="{{variant_id}}" placeholder="0" size="20" type="text" value="{{quantity}}">
+						</div>
+						
 					</div>
 
 				{{/items}}
 
 				<div class="row">
-
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-
+					<div class="col-md-6">
 						{{#if discounts_available }}
 						<div class="row">
 							<div class="col-md-12">
@@ -541,7 +536,6 @@
 							</div>
 						</div>
 						{{/if}}
-
 						{{#if enable_instructions_to_seller }}
 						<div class="row">
 							<div class="col-md-12" style="margin-bottom:20px;">
@@ -550,17 +544,14 @@
 							</div>
 						</div>
 						{{/if}}
-
 					</div>
-
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<div class="col-md-6">
 						<a href="#" class="btn update pull-right" data-cart-function="update">Update</a>
 						<div class="pull-right sub-total">
 							<div class="intro">Sub-total</div>
 							<div class="price">{{formatted_total}}</div>
 						</div>
 					</div>
-
 				</div>
 
 			</div>

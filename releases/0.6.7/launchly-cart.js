@@ -1,4 +1,4 @@
-/* launch.ly Shopping Cart - v0.6.8 - 2014-09-10
+/* launch.ly Shopping Cart - v0.6.7 - 2014-09-10
  * https://github.com/launchly/launchly-cart
  * Copyright (c) 2014 Craig Sullivan; Licensed MIT */
 
@@ -57,8 +57,8 @@ var cart = {
 	cached: {},
 	stripe_icon: 'https://d1adef9hr2r55o.cloudfront.net/images/launchly-stripe-icon.png',
 	secure_url: '',
-	templates_path: 'https://d1adef9hr2r55o.cloudfront.net/releases/0.6.8/launchly-cart.templates.html',
-	css_path: 'https://d1adef9hr2r55o.cloudfront.net/releases/0.6.8/cart.min.css',
+	templates_path: 'https://d1adef9hr2r55o.cloudfront.net/releases/0.6.7/launchly-cart.templates.html',
+	css_path: 'https://d1adef9hr2r55o.cloudfront.net/releases/0.6.7/cart.min.css',
 	templates: [
 		'cart_checkout',
 		'cart_contact_details',
