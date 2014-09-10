@@ -506,6 +506,7 @@ var cart = {
 		jQuery('#shopping-cart').toggleClass('sc-menu-open');
 	}
 };
+
 jQuery(cart).on('cart.changed', function(event, current_cart) { 
 
 	var currentYear = (new Date()).getFullYear();
@@ -539,6 +540,7 @@ jQuery(cart).on('cart.changed', function(event, current_cart) {
 		event.preventDefault();
 		jQuery(this).addClass('hidden');
 		jQuery('#instructions_to_seller').removeClass('hidden');
+		jQuery('#instructions_to_seller').focus();
 	});
 });
 
