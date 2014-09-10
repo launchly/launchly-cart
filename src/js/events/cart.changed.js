@@ -22,6 +22,7 @@ jQuery(cart).on('cart.changed', function(event, current_cart) {
 	jQuery('.cart-checkout').html(cart.cached_template('cart_checkout', current_cart));
 	
 	if (jQuery('#instructions_to_seller').length > 0) {
+
 		if (jQuery('#instructions_to_seller').val().length > 0) {
 			jQuery('#instructions_to_seller').removeClass('hidden');
 		} else {
@@ -33,5 +34,6 @@ jQuery(cart).on('cart.changed', function(event, current_cart) {
 		event.preventDefault();
 		jQuery(this).addClass('hidden');
 		jQuery('#instructions_to_seller').removeClass('hidden');
+		jQuery('#instructions_to_seller').focus();
 	});
 });
