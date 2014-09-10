@@ -55,22 +55,6 @@
 	margin-bottom: 20px;
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-	#shopping-cart { 
-		width: 80%; 
-		&.sc-menu { right: -80%; }
-	}
-	
-}
-
-@media (min-width: 320px) and (max-width: 480px) {
-	#shopping-cart { 
-		width: 100%;
-		&.sc-menu { right: -100%; }
-	}
-	
-}
-
 #shopping-cart {
 
 	overflow-x: hidden;
@@ -535,3 +519,17 @@ label {
 }
 
 #instructions_to_seller { width:100%; }
+
+@media (min-width: 768px) and (max-width: 1024px) {
+	#shopping-cart { 
+		width: 80%; 
+		&.sc-menu { right: -80%; }
+	}
+}
+
+@media (min-width: 320px) and (max-width: 640px) {
+	#shopping-cart { 
+		width: 100%;
+		&.sc-menu { right: -100%; }
+	}
+}
